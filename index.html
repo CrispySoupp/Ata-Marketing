@@ -163,8 +163,11 @@
         <p class="hero-fade" style="font-size:14px;font-weight:500;color:#f0ece4;line-height:1.6;margin-bottom:28px;animation-delay:0.55s;">
           Sign up below to receive <strong style="color:#c8a96e;">3 free strategies</strong> your business can act on today to start climbing local rankings.
         </p>
-        <form class="hero-fade" onsubmit="return false;" style="display:flex;flex-direction:column;gap:10px;max-width:400px;animation-delay:0.65s;">
-          <input class="email-input" type="email" placeholder="name@email.com" autocomplete="email">
+        <div id="hero-success" style="display:none;font-size:14px;color:#f0ece4;line-height:1.7;max-width:400px;padding:16px 0;">
+          Thank you. We received your request and will contact you soon.
+        </div>
+        <form id="hero-form" class="hero-fade" style="display:flex;flex-direction:column;gap:10px;max-width:400px;animation-delay:0.65s;">
+          <input class="email-input" type="email" name="email" placeholder="name@email.com" autocomplete="email" required>
           <button type="submit" class="btn-gold" style="width:100%;padding:13px;font-size:13px;font-weight:500;letter-spacing:0.4px;">
             Send Me the Free Strategies
           </button>
@@ -206,36 +209,6 @@
         <div style="position:absolute;inset:-24px;background:radial-gradient(ellipse at center,rgba(200,169,110,0.07) 0%,transparent 68%);pointer-events:none;z-index:-1;border-radius:24px;"></div>
       </div>
     </div><!-- end grid -->
-  </section>
-
-  <!-- ══════════ DIVIDER ══════════ -->
-  <div style="max-width:1080px;margin:0 auto;padding:0 28px;"><div class="gold-divider"></div></div>
-
-  <!-- ══════════ LOGOS ══════════ -->
-  <section style="padding:44px 0 52px;">
-    <div data-a style="text-align:center;margin-bottom:28px;">
-      <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;">Trusted by local businesses across the country</span>
-    </div>
-    <div class="logos-strip">
-      <div class="logos-track">
-        <div class="logos-set">
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Stampton Shaw</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Surveyors</div></div>
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Gibsons</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Plumbing Co.</div></div>
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Crestline</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Auto Group</div></div>
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Peak Dental</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Practice</div></div>
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">WoodBliss</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Tree Care</div></div>
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Hazel &amp; Co.</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Real Estate</div></div>
-        </div>
-        <div class="logos-set" aria-hidden="true">
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Stampton Shaw</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Surveyors</div></div>
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Gibsons</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Plumbing Co.</div></div>
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Crestline</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Auto Group</div></div>
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Peak Dental</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Practice</div></div>
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">WoodBliss</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Tree Care</div></div>
-          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Hazel &amp; Co.</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Real Estate</div></div>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- ══════════ DIVIDER ══════════ -->
@@ -319,6 +292,20 @@
   </footer>
 
   <script>
+    // ═══ HERO FORM ═══
+    document.getElementById('hero-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var data = new FormData(this);
+      fetch('https://formsubmit.co/ajax/ata.marketing@hotmail.com', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      }).finally(function() {
+        document.getElementById('hero-form').style.display = 'none';
+        document.getElementById('hero-success').style.display = 'block';
+      });
+    });
+
     // ═══ SCROLL REVEAL ═══
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
