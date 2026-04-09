@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Your Profile Analyzed — Ata Marketing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { background: #1a1814; color: #f0ece4; font-family: 'DM Sans', sans-serif; }
+
+    /* ── Scroll reveal ── */
+    [data-a] {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+    }
+    [data-a].vis { opacity: 1; transform: translateY(0); }
+    [data-a][data-d="1"] { transition-delay: 80ms; }
+    [data-a][data-d="2"] { transition-delay: 160ms; }
+    [data-a][data-d="3"] { transition-delay: 240ms; }
+
+    /* ── Nav logo hover ── */
+    .logo-wrap:hover .bar-mid { animation: bar-pulse 0.55s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes bar-pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+    /* ── Buttons ── */
+    .btn-gold {
+      background: #c8a96e; color: #1a1814; border: none;
+      padding: 12px 28px; border-radius: 7px;
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.3px; cursor: pointer; display: inline-block;
+      white-space: nowrap; text-decoration: none;
+      transition: background 0.18s ease, transform 0.18s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .btn-gold:hover { background: #d4b97e; transform: translateY(-2px); }
+    .btn-gold:active { transform: translateY(0); }
+
+    /* ── Submit button (dark) ── */
+    .btn-submit {
+      width: 100%; padding: 16px 24px;
+      background: #f0ece4; color: #1a1814;
+      border: none; border-radius: 9px;
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: background 0.18s ease, transform 0.18s cubic-bezier(0.34,1.56,0.64,1);
+      letter-spacing: 0.2px;
+    }
+    .btn-submit:hover { background: #fff; transform: translateY(-1px); }
+    .btn-submit:active { transform: translateY(0); }
+
+    /* ── Inputs ── */
+    .field {
+      background: rgba(255,255,255,0.04);
+      border: 0.5px solid rgba(240,236,228,0.15);
+      color: #f0ece4; border-radius: 8px;
+      padding: 13px 16px; font-family: 'DM Sans', sans-serif;
+      font-size: 13px; outline: none; width: 100%;
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+    .field::placeholder { color: #555; }
+    .field:focus { border-color: rgba(200,169,110,0.45); background: rgba(255,255,255,0.06); }
+    .field-label {
+      font-size: 11px; color: #888; margin-bottom: 6px;
+      letter-spacing: 0.3px; display: block;
+    }
+
+    /* ── Radio buttons ── */
+    .radio-group { display: flex; gap: 10px; }
+    .radio-opt {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 8px;
+      border: 0.5px solid rgba(240,236,228,0.15);
+      cursor: pointer; font-size: 13px; color: #888;
+      transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+      user-select: none;
+    }
+    .radio-opt input[type=radio] { display: none; }
+    .radio-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      border: 1.5px solid #555; flex-shrink: 0;
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+    .radio-opt:has(input:checked) {
+      border-color: rgba(200,169,110,0.4);
+      background: rgba(200,169,110,0.06); color: #f0ece4;
+    }
+    .radio-opt:has(input:checked) .radio-dot {
+      background: #c8a96e; border-color: #c8a96e;
+    }
+
+    /* ── Labels / dividers ── */
+    .sec-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: #c8a96e; background: rgba(200,169,110,0.1);
+      border: 0.5px solid rgba(200,169,110,0.25);
+      border-radius: 100px; padding: 5px 12px;
+    }
+    .gold-divider { height: 0.5px; background: linear-gradient(to right,transparent,rgba(200,169,110,0.28) 30%,rgba(200,169,110,0.28) 70%,transparent); }
+    .card-surface { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(200,169,110,0.12); border-radius: 14px; }
+
+    /* ── FAQ accordion ── */
+    .faq-item { border-bottom: 0.5px solid rgba(200,169,110,0.14); }
+    .faq-item summary { cursor: pointer; list-style: none; padding: 18px 0; display: flex; align-items: center; justify-content: space-between; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-plus {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: rgba(200,169,110,0.12); border: 0.5px solid rgba(200,169,110,0.2);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: background 0.18s ease, transform 0.22s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .faq-item[open] .faq-plus { background: rgba(200,169,110,0.2); transform: rotate(45deg); }
+    .faq-body { font-size: 13px; color: #888; line-height: 1.75; padding-bottom: 18px; font-weight: 300; max-width: 520px; }
+
+    /* ── Stat badges ── */
+    .stat-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; color: #888;
+    }
+    .stat-dot { width: 6px; height: 6px; border-radius: 50%; background: #c8a96e; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ NAV ══════════ -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(26,24,20,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:0.5px solid rgba(200,169,110,0.12);">
+    <div style="max-width:1080px;margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;">
+      <a href="index.html" class="logo-wrap" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <div style="position:relative;background:#2a2a2a;border-radius:10px;padding:8px 10px;display:flex;align-items:flex-end;gap:3px;height:36px;">
+          <div style="background:#f0ece4;width:6px;height:10px;border-radius:2px;"></div>
+          <div class="bar-mid" style="background:#f0ece4;width:6px;height:16px;border-radius:2px;"></div>
+          <div style="background:#f0ece4;width:6px;height:22px;border-radius:2px;"></div>
+          <svg style="position:absolute;top:4px;left:6px;pointer-events:none;" width="34" height="28" viewBox="0 0 34 28" fill="none">
+            <path d="M5 24 L13 16 L21 10 L29 4" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="29" cy="4" r="2" fill="#c8a96e"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#f0ece4;letter-spacing:-0.3px;line-height:1;">Ata Marketing</div>
+          <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c8a96e;margin-top:2px;">Local SEO Specialists</div>
+        </div>
+      </a>
+      <a href="apply.html" class="btn-gold">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- ══════════ APPLY HERO + FORM ══════════ -->
+  <section style="max-width:1080px;margin:0 auto;padding:72px 28px 80px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+
+      <!-- Left: Copy -->
+      <div style="padding-top:8px;">
+        <div data-a style="margin-bottom:16px;"><span class="sec-label">Free Stuff</span></div>
+        <h1 data-a data-d="1" style="font-family:'Playfair Display',serif;font-size:52px;font-weight:900;line-height:1.02;letter-spacing:-0.03em;color:#f0ece4;margin-bottom:28px;">
+          Get Your<br>Profile<br><em style="color:#c8a96e;">Analyzed</em>
+        </h1>
+        <p data-a data-d="2" style="font-size:15px;color:#888;line-height:1.75;margin-bottom:24px;font-weight:300;">
+          Fill out the form and we'll record a personalized video showing the exact things that need to change so your business ranks in the top 3 within your area.
+        </p>
+        <p data-a data-d="3" style="font-size:14px;color:#666;line-height:1.7;margin-bottom:36px;font-weight:300;">
+          No costs. No obligations. No annoying sales pitch.<br><strong style="color:#f0ece4;font-weight:500;">Guaranteed.</strong>
+        </p>
+
+        <!-- Social proof badges -->
+        <div data-a data-d="3" style="display:flex;flex-direction:column;gap:10px;">
+          <div class="stat-badge"><div class="stat-dot"></div>50+ satisfied clients</div>
+          <div class="stat-badge"><div class="stat-dot"></div>4+ years of experience</div>
+          <div class="stat-badge"><div class="stat-dot"></div>Results within 90 days — guaranteed</div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div data-a data-d="2" class="card-surface" style="padding:32px 28px;box-shadow:0 8px 48px rgba(0,0,0,0.4),0 1px 4px rgba(0,0,0,0.3);">
+        <form onsubmit="return false;" style="display:flex;flex-direction:column;gap:14px;">
+          <!-- Row: First + Last name -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label class="field-label">First Name <span style="color:#c8a96e;">*</span></label>
+              <input class="field" type="text" placeholder="First name" required>
+            </div>
+            <div>
+              <label class="field-label">Last Name <span style="color:#c8a96e;">*</span></label>
+              <input class="field" type="text" placeholder="Last name" required>
+            </div>
+          </div>
+
+          <!-- Business email -->
+          <div>
+            <label class="field-label">Business Email <span style="color:#c8a96e;">*</span></label>
+            <input class="field" type="email" placeholder="you@yourbusiness.com" required>
+          </div>
+
+          <!-- Row: Phone code + number -->
+          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;">
+            <div>
+              <label class="field-label">Code</label>
+              <input class="field" type="text" placeholder="+1" style="text-align:center;">
+            </div>
+            <div>
+              <label class="field-label">Phone Number <span style="color:#c8a96e;">*</span></label>
+              <input class="field" type="tel" placeholder="(555) 000-0000" required>
+            </div>
+          </div>
+
+          <!-- Row: Website + Company name -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label class="field-label">Website <span style="color:#c8a96e;">*</span></label>
+              <input class="field" type="url" placeholder="yourbusiness.com" required>
+            </div>
+            <div>
+              <label class="field-label">Company Name <span style="color:#c8a96e;">*</span></label>
+              <input class="field" type="text" placeholder="Your Business LLC" required>
+            </div>
+          </div>
+
+          <!-- Google Maps URL -->
+          <div>
+            <label class="field-label">Your Google Maps URL <span style="color:#c8a96e;">*</span></label>
+            <input class="field" type="url" placeholder="maps.google.com/..." required>
+          </div>
+
+          <!-- Timeline -->
+          <div>
+            <label class="field-label" style="margin-bottom:10px;">By when do you want to solve this? <span style="color:#c8a96e;">*</span></label>
+            <div class="radio-group" style="flex-wrap:wrap;">
+              <label class="radio-opt">
+                <input type="radio" name="timeline" value="today" checked>
+                <div class="radio-dot"></div>
+                Today
+              </label>
+              <label class="radio-opt">
+                <input type="radio" name="timeline" value="tomorrow">
+                <div class="radio-dot"></div>
+                Tomorrow
+              </label>
+              <label class="radio-opt">
+                <input type="radio" name="timeline" value="fewweeks">
+                <div class="radio-dot"></div>
+                In a few weeks
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-submit" style="margin-top:6px;">
+            Submit
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a1814" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17L17 7"/><path d="M7 7h10v10"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FAQ ══════════ -->
+  <section style="max-width:1080px;margin:0 auto;padding:0 28px 104px;">
+    <div class="card-surface" style="padding:56px 48px;position:relative;overflow:hidden;">
+      <!-- Background glow -->
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:500px;height:200px;background:radial-gradient(ellipse at center top,rgba(200,169,110,0.05) 0%,transparent 70%);pointer-events:none;"></div>
+
+      <!-- Icon -->
+      <div data-a style="display:flex;flex-direction:column;align-items:center;margin-bottom:24px;">
+        <div style="width:48px;height:48px;border-radius:11px;background:#c8a96e;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1814" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <span style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#c8a96e;">Questions</span>
+      </div>
+
+      <h2 data-a data-d="1" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;letter-spacing:-0.03em;color:#f0ece4;text-align:center;margin-bottom:40px;line-height:1.1;">
+        Frequently Asked <em>Questions</em>
+      </h2>
+
+      <!-- FAQ items -->
+      <div style="max-width:640px;margin:0 auto;">
+
+        <details data-a class="faq-item">
+          <summary>
+            <span style="font-size:14px;color:#f0ece4;font-weight:400;flex:1;padding-right:16px;">1. How do I know this will actually work for my business?</span>
+            <div class="faq-plus">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+                <line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="faq-body">We've helped 50+ local businesses across dozens of industries claim top 3 spots on Google Maps. Before we work together, we'll do a free analysis of your profile and market to confirm there's a clear path to the top. If we don't believe we can get you there, we'll tell you upfront.</div>
+        </details>
+
+        <details data-a class="faq-item">
+          <summary>
+            <span style="font-size:14px;color:#f0ece4;font-weight:400;flex:1;padding-right:16px;">2. What does this actually cost?</span>
+            <div class="faq-plus">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+                <line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="faq-body">Pricing depends on your market, competition level, and the package that fits your goals. We discuss this transparently on the strategy call — no hidden fees, no surprise charges. You'll know the full number before signing anything.</div>
+        </details>
+
+        <details data-a class="faq-item">
+          <summary>
+            <span style="font-size:14px;color:#f0ece4;font-weight:400;flex:1;padding-right:16px;">3. Do I need to be tech-savvy to get started?</span>
+            <div class="faq-plus">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+                <line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="faq-body">Not at all. We handle everything technical. You'll get step-by-step instructions for granting us access and after that, you can focus on running your business while we do the rest.</div>
+        </details>
+
+        <details data-a class="faq-item">
+          <summary>
+            <span style="font-size:14px;color:#f0ece4;font-weight:400;flex:1;padding-right:16px;">4. How long before I see real results?</span>
+            <div class="faq-plus">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+                <line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="faq-body">Most clients see measurable movement in rankings within the first 3–4 weeks. Our goal is to hit the top 3 within 90 days — and that's backed by our guarantee: if we miss it, billing pauses until we do.</div>
+        </details>
+
+        <details data-a class="faq-item">
+          <summary>
+            <span style="font-size:14px;color:#f0ece4;font-weight:400;flex:1;padding-right:16px;">5. How much of my time does this require each week?</span>
+            <div class="faq-plus">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+                <line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="faq-body">Very little. After onboarding (which takes about 20 minutes), we run everything. You'll receive weekly reports so you stay informed, but there's no ongoing effort required from your side.</div>
+        </details>
+
+        <details data-a class="faq-item" style="border-bottom:none;">
+          <summary>
+            <span style="font-size:14px;color:#f0ece4;font-weight:400;flex:1;padding-right:16px;">6. What if I'm not satisfied with the results?</span>
+            <div class="faq-plus">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+                <line x1="6" y1="0" x2="6" y2="12"/><line x1="0" y1="6" x2="12" y2="6"/>
+              </svg>
+            </div>
+          </summary>
+          <div class="faq-body">Our guarantee covers performance, not just effort. If you don't hit the top 3 within 90 days, we stop billing until you do. We only win when you win — that's how we built this business.</div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer style="border-top:0.5px solid rgba(200,169,110,0.12);padding:48px 28px 32px;">
+    <div style="max-width:1080px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px;flex-wrap:wrap;gap:32px;">
+        <div style="max-width:280px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <div style="position:relative;background:#2a2a2a;border-radius:8px;padding:7px 9px;display:flex;align-items:flex-end;gap:2.5px;height:30px;">
+              <div style="background:#f0ece4;width:5px;height:8px;border-radius:1.5px;"></div>
+              <div style="background:#f0ece4;width:5px;height:13px;border-radius:1.5px;"></div>
+              <div style="background:#f0ece4;width:5px;height:19px;border-radius:1.5px;"></div>
+            </div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#f0ece4;letter-spacing:-0.3px;">Ata Marketing</div>
+          </div>
+          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#c8a96e;margin-bottom:8px;line-height:1.3;">Dominate Your<br>Local Market.</div>
+          <div style="font-size:11px;color:#555;">Built for local business owners who are done being invisible.</div>
+        </div>
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:14px;">Legal</div>
+          <a href="terms.html" style="display:block;font-size:13px;color:#888;text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#c8a96e'" onmouseout="this.style.color='#888'">Terms of Service</a>
+        </div>
+      </div>
+      <div class="gold-divider" style="margin-bottom:20px;"></div>
+      <div style="font-size:10px;color:#3d3830;">© 2025 All rights reserved by Ata Marketing. Legal information upon request at hello(at)atamarketing.com</div>
+    </div>
+  </footer>
+
+  <script>
+    // Radio button selection styling (fallback for older browsers without :has())
+    document.querySelectorAll('.radio-opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.radio-opt').forEach(o => {
+          o.style.borderColor = 'rgba(240,236,228,0.15)';
+          o.style.background = 'transparent';
+          o.style.color = '#888';
+          o.querySelector('.radio-dot').style.background = 'transparent';
+          o.querySelector('.radio-dot').style.borderColor = '#555';
+        });
+        opt.style.borderColor = 'rgba(200,169,110,0.4)';
+        opt.style.background = 'rgba(200,169,110,0.06)';
+        opt.style.color = '#f0ece4';
+        opt.querySelector('.radio-dot').style.background = '#c8a96e';
+        opt.querySelector('.radio-dot').style.borderColor = '#c8a96e';
+      });
+    });
+    // Init first radio
+    const first = document.querySelector('.radio-opt');
+    if (first) first.click();
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('vis'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+    document.querySelectorAll('[data-a]').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

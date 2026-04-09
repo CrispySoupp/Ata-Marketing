@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ata Marketing — Local SEO Specialists</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            nb: '#1a1814', ch: '#2a2a2a', gold: '#c8a96e',
+            cream: '#f0ece4', sand: '#d4c5a9', dw: '#3d3830',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { background: #1a1814; color: #f0ece4; font-family: 'DM Sans', sans-serif; }
+
+    /* ── Hero: letter spring animation ── */
+    @keyframes hero-letter-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Hero above-fold fade-ins (no IntersectionObserver needed) ── */
+    @keyframes fade-up-in {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-fade { animation: fade-up-in 0.65s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
+/* ── Scroll-reveal animation ── */
+    [data-a] {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1);
+    }
+    [data-a].vis { opacity: 1; transform: translateY(0); }
+    [data-a][data-d="1"] { transition-delay: 80ms; }
+    [data-a][data-d="2"] { transition-delay: 160ms; }
+    [data-a][data-d="3"] { transition-delay: 240ms; }
+    [data-a][data-d="4"] { transition-delay: 320ms; }
+    [data-a][data-d="5"] { transition-delay: 400ms; }
+
+    /* ── Logo bar hover pulse ── */
+    .logo-wrap:hover .bar-mid { animation: bar-pulse 0.55s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes bar-pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+    /* ── Scrolling logo strip ── */
+    .logos-track {
+      display: flex;
+      animation: scroll-left 28s linear infinite;
+      width: max-content;
+    }
+    .logos-set { display: flex; gap: 52px; align-items: center; padding-right: 52px; flex-shrink: 0; }
+    @keyframes scroll-left { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .logos-strip {
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+
+    /* ── Play button ── */
+    .play-ring {
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease;
+    }
+    .video-card:hover .play-ring {
+      transform: scale(1.12);
+      box-shadow: 0 8px 36px rgba(0,0,0,0.6);
+    }
+
+    /* ── Buttons ── */
+    .btn-gold {
+      background: #c8a96e; color: #1a1814; border: none;
+      padding: 12px 28px; border-radius: 7px;
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.3px; cursor: pointer; display: inline-block; white-space: nowrap;
+      transition: background 0.18s ease, transform 0.18s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .btn-gold:hover { background: #d4b97e; transform: translateY(-2px); }
+    .btn-gold:active { transform: translateY(0); }
+
+    /* ── Labels ── */
+    .sec-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: #c8a96e; background: rgba(200,169,110,0.1);
+      border: 0.5px solid rgba(200,169,110,0.25);
+      border-radius: 100px; padding: 5px 12px;
+    }
+
+    /* ── Team card ── */
+    .team-card { transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1); }
+    .team-card:hover { transform: translateY(-5px); }
+    .team-photo { transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .team-card:hover .team-photo { transform: scale(1.03); }
+
+    /* ── Input ── */
+    .email-input {
+      background: rgba(255,255,255,0.05);
+      border: 0.5px solid rgba(240,236,228,0.2);
+      color: #f0ece4; border-radius: 7px;
+      padding: 12px 16px; font-family: 'DM Sans', sans-serif;
+      font-size: 13px; outline: none; width: 100%;
+      transition: border-color 0.18s ease;
+    }
+    .email-input::placeholder { color: #555; }
+    .email-input:focus { border-color: rgba(200,169,110,0.5); }
+
+    /* ── Dividers / surfaces ── */
+    .gold-divider { height: 0.5px; background: linear-gradient(to right,transparent,rgba(200,169,110,0.28) 30%,rgba(200,169,110,0.28) 70%,transparent); }
+    .card-surface { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(200,169,110,0.12); border-radius: 14px; }
+    .shadow-gold { box-shadow: 0 4px 28px rgba(200,169,110,0.07), 0 1px 4px rgba(0,0,0,0.4); }
+    .shadow-deep { box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3); }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ NAV ══════════ -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(26,24,20,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:0.5px solid rgba(200,169,110,0.12);">
+    <div style="max-width:1080px;margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;">
+      <a href="index.html" class="logo-wrap" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <div style="position:relative;background:#2a2a2a;border-radius:10px;padding:8px 10px;display:flex;align-items:flex-end;gap:3px;height:36px;">
+          <div style="background:#f0ece4;width:6px;height:10px;border-radius:2px;"></div>
+          <div class="bar-mid" style="background:#f0ece4;width:6px;height:16px;border-radius:2px;"></div>
+          <div style="background:#f0ece4;width:6px;height:22px;border-radius:2px;"></div>
+          <svg style="position:absolute;top:4px;left:6px;pointer-events:none;" width="34" height="28" viewBox="0 0 34 28" fill="none">
+            <path d="M5 24 L13 16 L21 10 L29 4" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="29" cy="4" r="2" fill="#c8a96e"/>
+          </svg>
+        </div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#f0ece4;letter-spacing:-0.3px;line-height:1;">Ata Marketing</div>
+          <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c8a96e;margin-top:2px;">Local SEO Specialists</div>
+        </div>
+      </a>
+      <a href="apply.html" class="btn-gold" style="text-decoration:none;">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section style="position:relative;overflow:hidden;max-width:1080px;margin:0 auto;padding:80px 28px 88px;">
+
+<div style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+
+      <!-- Left -->
+      <div>
+        <div class="hero-fade" style="margin-bottom:20px;animation-delay:0.05s;"><span class="sec-label">Google Business Profile</span></div>
+        <h1 id="hero-h1" style="font-family:'Playfair Display',serif;font-size:44px;font-weight:900;line-height:1.07;letter-spacing:-0.03em;color:#f0ece4;margin-bottom:20px;">
+          Your Competitors<br>Are Showing Up.<br><span style="color:#c8a96e;">You're Not.</span>
+        </h1>
+        <p class="hero-fade" style="font-size:15px;color:#888;line-height:1.72;margin-bottom:20px;font-weight:300;animation-delay:0.45s;">
+          Watch this short video to discover why most local businesses are invisible on Google Maps — and what it actually takes to break into the top 3.
+        </p>
+        <p class="hero-fade" style="font-size:14px;font-weight:500;color:#f0ece4;line-height:1.6;margin-bottom:28px;animation-delay:0.55s;">
+          Sign up below to receive <strong style="color:#c8a96e;">3 free strategies</strong> your business can act on today to start climbing local rankings.
+        </p>
+        <form class="hero-fade" onsubmit="return false;" style="display:flex;flex-direction:column;gap:10px;max-width:400px;animation-delay:0.65s;">
+          <input class="email-input" type="email" placeholder="name@email.com" autocomplete="email">
+          <button type="submit" class="btn-gold" style="width:100%;padding:13px;font-size:13px;font-weight:500;letter-spacing:0.4px;">
+            Send Me the Free Strategies
+          </button>
+          <p style="font-size:10px;color:#555;letter-spacing:0.3px;">No spam. Unsubscribe any time.</p>
+        </form>
+      </div>
+
+      <!-- Right: Video -->
+      <div class="hero-fade" style="position:relative;z-index:1;animation-delay:0.2s;">
+        <div class="video-card shadow-deep" style="border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:#2a2a2a;position:relative;cursor:pointer;">
+          <img src="https://placehold.co/640x400/1a1814/2a2a2a?text=+" alt="Video" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,24,20,0.65) 0%,rgba(200,169,110,0.06) 100%);"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,24,20,0.82) 0%,transparent 55%);"></div>
+          <!-- Label -->
+          <div style="position:absolute;top:18px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.58);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:100px;padding:6px 18px;white-space:nowrap;">
+            <span style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#f0ece4;letter-spacing:0.5px;">Click To Watch</span>
+          </div>
+          <!-- Sound -->
+          <div style="position:absolute;top:15px;right:15px;background:rgba(0,0,0,0.5);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f0ece4" stroke-width="2" stroke-linecap="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+          </div>
+          <!-- Play -->
+          <div class="play-ring" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="width:58px;height:58px;border-radius:50%;background:#ff0000;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.5);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <!-- Progress bar -->
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:8px 14px;display:flex;align-items:center;gap:10px;">
+            <span style="font-size:10px;color:#aaa;font-family:monospace;">2:47</span>
+            <div style="flex:1;height:2px;background:rgba(255,255,255,0.12);border-radius:2px;position:relative;">
+              <div style="position:absolute;left:0;top:0;height:100%;width:35%;background:#c8a96e;border-radius:2px;"></div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute;inset:-24px;background:radial-gradient(ellipse at center,rgba(200,169,110,0.07) 0%,transparent 68%);pointer-events:none;z-index:-1;border-radius:24px;"></div>
+      </div>
+    </div><!-- end grid -->
+  </section>
+
+  <!-- ══════════ DIVIDER ══════════ -->
+  <div style="max-width:1080px;margin:0 auto;padding:0 28px;"><div class="gold-divider"></div></div>
+
+  <!-- ══════════ LOGOS ══════════ -->
+  <section style="padding:44px 0 52px;">
+    <div data-a style="text-align:center;margin-bottom:28px;">
+      <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;">Trusted by local businesses across the country</span>
+    </div>
+    <div class="logos-strip">
+      <div class="logos-track">
+        <div class="logos-set">
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Stampton Shaw</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Surveyors</div></div>
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Gibsons</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Plumbing Co.</div></div>
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Crestline</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Auto Group</div></div>
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Peak Dental</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Practice</div></div>
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">WoodBliss</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Tree Care</div></div>
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Hazel &amp; Co.</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Real Estate</div></div>
+        </div>
+        <div class="logos-set" aria-hidden="true">
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Stampton Shaw</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Surveyors</div></div>
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Gibsons</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Plumbing Co.</div></div>
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Crestline</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Auto Group</div></div>
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Peak Dental</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Practice</div></div>
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">WoodBliss</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Tree Care</div></div>
+          <div style="opacity:0.32;"><div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#f0ece4;white-space:nowrap;">Hazel &amp; Co.</div><div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-top:2px;">Real Estate</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ DIVIDER ══════════ -->
+  <div style="max-width:1080px;margin:0 auto;padding:0 28px;"><div class="gold-divider"></div></div>
+
+  <!-- ══════════ TEAM ══════════ -->
+  <section style="max-width:1080px;margin:0 auto;padding:88px 28px;">
+    <div data-a style="text-align:center;margin-bottom:16px;"><span class="sec-label">Our team</span></div>
+    <h2 data-a data-d="1" style="font-family:'Playfair Display',serif;font-size:40px;font-weight:900;text-align:center;letter-spacing:-0.03em;color:#f0ece4;margin-bottom:12px;">Meet the team</h2>
+    <p data-a data-d="2" style="text-align:center;color:#666;font-size:14px;margin-bottom:56px;font-weight:300;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.72;">The people who'll personally handle your rankings. Small team. Big results.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;">
+      <div data-a data-d="1" class="team-card" style="cursor:default;">
+        <div style="border-radius:13px;overflow:hidden;aspect-ratio:3/4;margin-bottom:16px;position:relative;">
+          <img class="team-photo" src="https://placehold.co/400x533/2a2a2a/3d3830?text=+" alt="Yusuf Ata" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,24,20,0.72) 0%,transparent 52%);"></div>
+        </div>
+        <div style="font-size:15px;font-weight:500;color:#f0ece4;">Yusuf Ata</div>
+        <div style="font-size:12px;color:#666;margin-top:3px;">Founder</div>
+      </div>
+      <div data-a data-d="2" class="team-card" style="cursor:default;">
+        <div style="border-radius:13px;overflow:hidden;aspect-ratio:3/4;margin-bottom:16px;position:relative;">
+          <img class="team-photo" src="https://placehold.co/400x533/2a2a2a/3d3830?text=+" alt="Sara Kaya" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,24,20,0.72) 0%,transparent 52%);"></div>
+        </div>
+        <div style="font-size:15px;font-weight:500;color:#f0ece4;">Sara Kaya</div>
+        <div style="font-size:12px;color:#666;margin-top:3px;">Head of Client Success</div>
+      </div>
+      <div data-a data-d="3" class="team-card" style="cursor:default;">
+        <div style="border-radius:13px;overflow:hidden;aspect-ratio:3/4;margin-bottom:16px;position:relative;">
+          <img class="team-photo" src="https://placehold.co/400x533/2a2a2a/3d3830?text=+" alt="Mia Chen" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,24,20,0.72) 0%,transparent 52%);"></div>
+        </div>
+        <div style="font-size:15px;font-weight:500;color:#f0ece4;">Mia Chen</div>
+        <div style="font-size:12px;color:#666;margin-top:3px;">SEO Strategist</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FREE STUFF CTA ══════════ -->
+  <section id="cta-section" style="max-width:1080px;margin:0 auto;padding:0 28px 104px;">
+    <div data-a class="card-surface shadow-gold" style="padding:60px 48px;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:560px;height:320px;background:radial-gradient(ellipse,rgba(200,169,110,0.07) 0%,transparent 68%);pointer-events:none;"></div>
+      <div style="width:52px;height:52px;border-radius:12px;background:#c8a96e;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a1814" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+        </svg>
+      </div>
+      <div style="margin-bottom:16px;"><span class="sec-label">Free stuff</span></div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:38px;font-weight:900;letter-spacing:-0.03em;color:#f0ece4;margin-bottom:20px;line-height:1.1;">
+        3 Steps to Rank in the<br><em style="color:#c8a96e;">Top 3</em> on Google Maps
+      </h2>
+      <p style="font-size:14px;color:#888;line-height:1.76;max-width:440px;margin:0 auto 32px;font-weight:300;">Get a free video showing the exact steps we take when a new client signs up — to get them ranking in local search within 90 days.</p>
+      <a href="apply.html" class="btn-gold" style="font-size:14px;padding:14px 36px;">Get 3 Free Steps</a>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer style="border-top:0.5px solid rgba(200,169,110,0.12);padding:48px 28px 32px;">
+    <div style="max-width:1080px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px;flex-wrap:wrap;gap:32px;">
+        <div style="max-width:280px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <div style="position:relative;background:#2a2a2a;border-radius:8px;padding:7px 9px;display:flex;align-items:flex-end;gap:2.5px;height:30px;">
+              <div style="background:#f0ece4;width:5px;height:8px;border-radius:1.5px;"></div>
+              <div style="background:#f0ece4;width:5px;height:13px;border-radius:1.5px;"></div>
+              <div style="background:#f0ece4;width:5px;height:19px;border-radius:1.5px;"></div>
+            </div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#f0ece4;letter-spacing:-0.3px;">Ata Marketing</div>
+          </div>
+          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#c8a96e;margin-bottom:8px;line-height:1.3;">Dominate Your<br>Local Market.</div>
+          <div style="font-size:11px;color:#555;">Built for local business owners who are done being invisible.</div>
+        </div>
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:14px;">Legal</div>
+          <a href="terms.html" style="display:block;font-size:13px;color:#888;text-decoration:none;margin-bottom:8px;transition:color 0.15s;" onmouseover="this.style.color='#c8a96e'" onmouseout="this.style.color='#888'">Terms of Service</a>
+        </div>
+      </div>
+      <div class="gold-divider" style="margin-bottom:20px;"></div>
+      <div style="font-size:10px;color:#3d3830;">© 2025 All rights reserved by Ata Marketing. Legal information upon request at hello(at)atamarketing.com</div>
+    </div>
+  </footer>
+
+  <script>
+    // ═══ SCROLL REVEAL ═══
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('vis');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('[data-a]').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

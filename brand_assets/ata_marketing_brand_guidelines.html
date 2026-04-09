@@ -1,0 +1,409 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.page{background:#1a1814;color:#f0ece4;font-family:'DM Sans',sans-serif;padding:48px 44px;max-width:820px;margin:0 auto}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding-bottom:32px;border-bottom:0.5px solid rgba(200,169,110,0.25);margin-bottom:44px}
+.hdr-left h1{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#f0ece4;letter-spacing:-1px;line-height:1}
+.hdr-left p{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#c8a96e;margin-top:6px}
+.logo-inline{background:#2a2a2a;border-radius:10px;padding:12px 20px;display:flex;align-items:center;gap:10px}
+.logo-bars{display:flex;align-items:flex-end;gap:3px;height:28px}
+.logo-bars span{background:#f0ece4;border-radius:2px;width:7px}
+.logo-bars span:nth-child(1){height:12px}
+.logo-bars span:nth-child(2){height:19px}
+.logo-bars span:nth-child(3){height:28px}
+.logo-trend{position:relative;width:28px;height:28px}
+.logo-wordmark{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#f0ece4;letter-spacing:-0.3px}
+.logo-sub{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c8a96e;margin-top:1px}
+
+.sec{margin-bottom:44px}
+.sec-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#c8a96e;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:0.5px;background:rgba(200,169,110,0.2)}
+
+/* Logo section */
+.logo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.lv{border-radius:10px;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lv.dark{background:#2a2a2a}
+.lv.light{background:#f0ece4}
+.lv.gold{background:#c8a96e}
+.lv-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:0.45}
+.lv.light .lv-label,.lv.gold .lv-label{color:#2a2a2a}
+
+/* Colors */
+.color-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.chip{border-radius:10px;overflow:hidden}
+.chip-swatch{height:60px}
+.chip-info{padding:10px 11px;background:rgba(255,255,255,0.05)}
+.chip-name{font-size:11px;font-weight:500;color:#f0ece4}
+.chip-hex{font-size:9px;color:#888;margin-top:3px;letter-spacing:0.5px;font-family:monospace}
+
+/* Typography */
+.type-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.type-card{background:rgba(255,255,255,0.04);border-radius:10px;padding:20px 20px 16px}
+.type-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#c8a96e;margin-bottom:12px}
+.type-sample-serif{font-family:'Playfair Display',serif;font-size:34px;font-weight:900;color:#f0ece4;line-height:1}
+.type-sample-sans{font-family:'DM Sans',sans-serif;font-size:34px;font-weight:300;color:#f0ece4;line-height:1}
+.type-name{font-size:11px;font-weight:500;color:#c8a96e;margin-top:10px}
+.type-weights{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap}
+.tw{font-size:11px;color:#888}
+.type-abc{font-size:11px;color:#666;margin-top:8px;letter-spacing:0.5px;line-height:1.6}
+
+/* Clearspace */
+.clearspace-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cs-card{background:rgba(255,255,255,0.04);border-radius:10px;padding:20px}
+.cs-demo{border:0.5px dashed rgba(200,169,110,0.4);border-radius:6px;padding:20px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.cs-note{font-size:10px;color:#888;line-height:1.5}
+
+/* Iconography */
+.icon-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.icon-chip{background:rgba(255,255,255,0.04);border-radius:8px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.icon-chip svg{width:20px;height:20px}
+.icon-lbl{font-size:8px;color:#666;letter-spacing:0.5px;text-transform:uppercase}
+
+/* Buttons */
+.btn-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn-primary{background:#c8a96e;color:#1a1814;border:none;padding:11px 28px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.5px;cursor:pointer}
+.btn-outline{background:transparent;color:#f0ece4;border:0.5px solid rgba(240,236,228,0.4);padding:11px 28px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer}
+.btn-ghost{background:transparent;color:#c8a96e;border:0.5px solid rgba(200,169,110,0.4);padding:11px 28px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer}
+
+/* Usage rules */
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rule-card{border-radius:10px;padding:16px 18px}
+.rule-card.do{background:rgba(29,158,117,0.1);border:0.5px solid rgba(29,158,117,0.25)}
+.rule-card.dont{background:rgba(216,90,48,0.1);border:0.5px solid rgba(216,90,48,0.25)}
+.rule-badge{font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.rule-card.do .rule-badge{color:#1d9e75}
+.rule-card.dont .rule-badge{color:#D85A30}
+.rule-text{font-size:11px;color:#aaa;line-height:1.6}
+
+.footer{margin-top:48px;padding-top:24px;border-top:0.5px solid rgba(200,169,110,0.15);display:flex;justify-content:space-between;align-items:center}
+.footer-brand{font-family:'Playfair Display',serif;font-size:14px;color:#c8a96e}
+.footer-note{font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase}
+</style>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="hdr">
+    <div class="hdr-left">
+      <h1>Brand<br>Guidelines</h1>
+      <p>Ata Marketing · 2025</p>
+    </div>
+    <div class="logo-inline">
+      <div class="logo-bars">
+        <span></span><span></span><span></span>
+      </div>
+      <div>
+        <div class="logo-wordmark">Ata Marketing</div>
+        <div class="logo-sub">Local SEO Specialists</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Company Logo -->
+  <div class="sec">
+    <div class="sec-label">Company Logo</div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:32px;display:flex;align-items:center;justify-content:center;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div style="background:#2a2a2a;border-radius:14px;padding:14px 16px;display:flex;align-items:flex-end;gap:4px;height:56px">
+          <div style="background:#f0ece4;width:9px;height:14px;border-radius:2px"></div>
+          <div style="background:#f0ece4;width:9px;height:22px;border-radius:2px"></div>
+          <div style="background:#f0ece4;width:9px;height:34px;border-radius:2px"></div>
+        </div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#f0ece4;letter-spacing:-0.5px">Ata Marketing</div>
+          <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#c8a96e;margin-top:3px">Local SEO Specialists</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:10px;color:#666;text-align:center">Primary logo — use on dark backgrounds</div>
+  </div>
+
+  <!-- Logo Variations -->
+  <div class="sec">
+    <div class="sec-label">Logo Variations</div>
+    <div class="logo-grid">
+      <!-- Dark bg -->
+      <div class="lv dark">
+        <div style="display:flex;align-items:flex-end;gap:3px;height:24px">
+          <div style="background:#f0ece4;width:7px;height:10px;border-radius:2px"></div>
+          <div style="background:#f0ece4;width:7px;height:16px;border-radius:2px"></div>
+          <div style="background:#f0ece4;width:7px;height:24px;border-radius:2px"></div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#f0ece4">Ata Marketing</div>
+        <div class="lv-label" style="color:#888">Dark Background</div>
+      </div>
+      <!-- Light bg -->
+      <div class="lv light">
+        <div style="display:flex;align-items:flex-end;gap:3px;height:24px">
+          <div style="background:#2a2a2a;width:7px;height:10px;border-radius:2px"></div>
+          <div style="background:#2a2a2a;width:7px;height:16px;border-radius:2px"></div>
+          <div style="background:#2a2a2a;width:7px;height:24px;border-radius:2px"></div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#2a2a2a">Ata Marketing</div>
+        <div class="lv-label">Light Background</div>
+      </div>
+      <!-- Gold bg -->
+      <div class="lv gold">
+        <div style="display:flex;align-items:flex-end;gap:3px;height:24px">
+          <div style="background:#1a1814;width:7px;height:10px;border-radius:2px"></div>
+          <div style="background:#1a1814;width:7px;height:16px;border-radius:2px"></div>
+          <div style="background:#1a1814;width:7px;height:24px;border-radius:2px"></div>
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#1a1814">Ata Marketing</div>
+        <div class="lv-label">Gold Background</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand Palette -->
+  <div class="sec">
+    <div class="sec-label">Brand Palette</div>
+    <div class="color-grid">
+      <div class="chip">
+        <div class="chip-swatch" style="background:#f0ece4"></div>
+        <div class="chip-info">
+          <div class="chip-name">Cream</div>
+          <div class="chip-hex">#F0ECE4</div>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="chip-swatch" style="background:#c8a96e"></div>
+        <div class="chip-info">
+          <div class="chip-name">Gold</div>
+          <div class="chip-hex">#C8A96E</div>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="chip-swatch" style="background:#2a2a2a"></div>
+        <div class="chip-info">
+          <div class="chip-name">Charcoal</div>
+          <div class="chip-hex">#2A2A2A</div>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="chip-swatch" style="background:#1a1814"></div>
+        <div class="chip-info">
+          <div class="chip-name">Near Black</div>
+          <div class="chip-hex">#1A1814</div>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="chip-swatch" style="background:#888"></div>
+        <div class="chip-info">
+          <div class="chip-name">Stone</div>
+          <div class="chip-hex">#888888</div>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="chip-swatch" style="background:#d4c5a9"></div>
+        <div class="chip-info">
+          <div class="chip-name">Warm Sand</div>
+          <div class="chip-hex">#D4C5A9</div>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="chip-swatch" style="background:#3d3830"></div>
+        <div class="chip-info">
+          <div class="chip-name">Dark Warm</div>
+          <div class="chip-hex">#3D3830</div>
+        </div>
+      </div>
+      <div class="chip">
+        <div class="chip-swatch" style="background:#e8dcc8"></div>
+        <div class="chip-info">
+          <div class="chip-name">Parchment</div>
+          <div class="chip-hex">#E8DCC8</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Typography -->
+  <div class="sec">
+    <div class="sec-label">Typography</div>
+    <div class="type-pair">
+      <div class="type-card">
+        <div class="type-tag">Display / Headlines</div>
+        <div class="type-sample-serif">Aa</div>
+        <div class="type-name">Playfair Display</div>
+        <div class="type-weights">
+          <span class="tw" style="font-family:'Playfair Display',serif;font-weight:400">Regular</span>
+          <span class="tw" style="font-family:'Playfair Display',serif;font-weight:700">Bold</span>
+          <span class="tw" style="font-family:'Playfair Display',serif;font-weight:900">Black</span>
+        </div>
+        <div class="type-abc">ABCDEFGHIJKLM<br>NOPQRSTUVWXYZ<br>abcdefghijklm<br>nopqrstuvwxyz</div>
+      </div>
+      <div class="type-card">
+        <div class="type-tag">Body / UI</div>
+        <div class="type-sample-sans">Aa</div>
+        <div class="type-name">DM Sans</div>
+        <div class="type-weights">
+          <span class="tw">Light</span>
+          <span class="tw" style="font-weight:400">Regular</span>
+          <span class="tw" style="font-weight:500">Medium</span>
+        </div>
+        <div class="type-abc">ABCDEFGHIJKLM<br>NOPQRSTUVWXYZ<br>abcdefghijklm<br>nopqrstuvwxyz</div>
+      </div>
+    </div>
+    <!-- Type scale -->
+    <div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:20px 24px">
+      <div class="type-tag" style="margin-bottom:16px">Type Scale</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;border-bottom:0.5px solid rgba(255,255,255,0.06);padding-bottom:10px">
+          <span style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:#f0ece4">Hero Heading</span>
+          <span style="font-size:9px;color:#555;letter-spacing:1px">Playfair / 32px / Black</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;border-bottom:0.5px solid rgba(255,255,255,0.06);padding-bottom:10px">
+          <span style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#f0ece4">Section Title</span>
+          <span style="font-size:9px;color:#555;letter-spacing:1px">Playfair / 22px / Bold</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;border-bottom:0.5px solid rgba(255,255,255,0.06);padding-bottom:10px">
+          <span style="font-size:15px;font-weight:500;color:#f0ece4">Subheading text</span>
+          <span style="font-size:9px;color:#555;letter-spacing:1px">DM Sans / 15px / Medium</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;border-bottom:0.5px solid rgba(255,255,255,0.06);padding-bottom:10px">
+          <span style="font-size:13px;color:#aaa">Body copy and descriptions go here</span>
+          <span style="font-size:9px;color:#555;letter-spacing:1px">DM Sans / 13px / Regular</span>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <span style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#c8a96e">Label / Overline</span>
+          <span style="font-size:9px;color:#555;letter-spacing:1px">DM Sans / 9px / Uppercase</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button Styles -->
+  <div class="sec">
+    <div class="sec-label">Button Styles</div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:24px">
+      <div class="btn-row">
+        <button class="btn-primary">Get Started</button>
+        <button class="btn-outline">Learn More</button>
+        <button class="btn-ghost">Contact Us</button>
+      </div>
+      <div style="display:flex;gap:24px;margin-top:16px">
+        <span style="font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase">Primary · Gold fill</span>
+        <span style="font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase">Secondary · Outline</span>
+        <span style="font-size:9px;color:#555;letter-spacing:1px;text-transform:uppercase">Ghost · Gold stroke</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logo Clearspace -->
+  <div class="sec">
+    <div class="sec-label">Logo Clearspace</div>
+    <div class="clearspace-wrap">
+      <div class="cs-card">
+        <div class="cs-demo">
+          <div style="position:relative;display:inline-block">
+            <div style="position:absolute;top:-12px;left:-12px;right:-12px;bottom:-12px;border:0.5px dashed rgba(200,169,110,0.5);border-radius:4px"></div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="display:flex;align-items:flex-end;gap:3px;height:20px">
+                <div style="background:#f0ece4;width:5px;height:8px;border-radius:1px"></div>
+                <div style="background:#f0ece4;width:5px;height:13px;border-radius:1px"></div>
+                <div style="background:#f0ece4;width:5px;height:20px;border-radius:1px"></div>
+              </div>
+              <span style="font-family:'Playfair Display',serif;font-size:11px;color:#f0ece4">Ata Marketing</span>
+            </div>
+          </div>
+        </div>
+        <div class="cs-note">Minimum clearspace = half the height of the logo mark on all sides. Never crowd the logo.</div>
+      </div>
+      <div class="cs-card">
+        <div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:16px;margin-bottom:10px">
+          <div style="font-size:10px;color:#c8a96e;margin-bottom:10px;letter-spacing:1px;text-transform:uppercase">Minimum Size</div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="display:flex;align-items:flex-end;gap:2px;height:14px">
+                <div style="background:#f0ece4;width:4px;height:6px;border-radius:1px"></div>
+                <div style="background:#f0ece4;width:4px;height:10px;border-radius:1px"></div>
+                <div style="background:#f0ece4;width:4px;height:14px;border-radius:1px"></div>
+              </div>
+              <span style="font-size:8px;color:#888">→ 20px min height</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="display:flex;align-items:flex-end;gap:3px;height:24px">
+                <div style="background:#f0ece4;width:6px;height:10px;border-radius:1px"></div>
+                <div style="background:#f0ece4;width:6px;height:16px;border-radius:1px"></div>
+                <div style="background:#f0ece4;width:6px;height:24px;border-radius:1px"></div>
+              </div>
+              <span style="font-size:8px;color:#888">→ Digital preferred</span>
+            </div>
+          </div>
+        </div>
+        <div class="cs-note">Do not use the logo below 20px height in digital. For print, minimum 8mm.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Usage Rules -->
+  <div class="sec">
+    <div class="sec-label">Usage Rules</div>
+    <div class="rules-grid">
+      <div class="rule-card do">
+        <div class="rule-badge">✓ Do</div>
+        <div class="rule-text">Use the logo on brand-approved backgrounds (dark, cream, gold).<br><br>Keep the wordmark and mark together at all times.<br><br>Use gold as an accent color, not a dominant background.<br><br>Maintain generous whitespace around all brand elements.</div>
+      </div>
+      <div class="rule-card dont">
+        <div class="rule-badge">✗ Don't</div>
+        <div class="rule-text">Stretch, rotate, or distort the logo in any way.<br><br>Place the logo on busy or clashing backgrounds.<br><br>Use unauthorized typefaces alongside the logo.<br><br>Recreate the logo in different colors outside the palette.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Iconography -->
+  <div class="sec">
+    <div class="sec-label">Iconography Style</div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:20px">
+      <div style="font-size:10px;color:#888;margin-bottom:14px">Thin stroke · 1.5px · Rounded caps · No fill</div>
+      <div class="icon-grid">
+        <div class="icon-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/>
+          </svg>
+          <div class="icon-lbl">Search</div>
+        </div>
+        <div class="icon-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z"/>
+          </svg>
+          <div class="icon-lbl">Grid</div>
+        </div>
+        <div class="icon-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <div class="icon-lbl">Analytics</div>
+        </div>
+        <div class="icon-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <div class="icon-lbl">Team</div>
+        </div>
+        <div class="icon-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <div class="icon-lbl">Trust</div>
+        </div>
+        <div class="icon-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <div class="icon-lbl">Info</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;font-size:10px;color:#555">Icons use Gold (#C8A96E) on dark surfaces · Charcoal (#2A2A2A) on light surfaces</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-brand">Ata Marketing</div>
+    <div class="footer-note">Brand Guidelines v1.0 · 2025 · Confidential</div>
+  </div>
+
+</div>
