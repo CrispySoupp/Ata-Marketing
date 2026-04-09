@@ -172,7 +172,13 @@
 
       <!-- Right: Form -->
       <div data-a data-d="2" class="card-surface" style="padding:32px 28px;box-shadow:0 8px 48px rgba(0,0,0,0.4),0 1px 4px rgba(0,0,0,0.3);">
-        <form onsubmit="return false;" style="display:flex;flex-direction:column;gap:14px;">
+        <div id="form-success" style="display:none;text-align:center;padding:48px 24px;">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#f0ece4;line-height:1.4;">Congratulations, you will rank top 3 in Google in 90 days.</div>
+        </div>
+        <form id="apply-form" action="https://formsubmit.co/ata.marketing@hotmail.com" method="POST" style="display:flex;flex-direction:column;gap:14px;">
+          <input type="hidden" name="_subject" value="New Profile Analysis Request — Ata Marketing">
+          <input type="hidden" name="_next" value="">
+          <input type="hidden" name="_captcha" value="false">
           <!-- Row: First + Last name -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
             <div>
@@ -215,10 +221,16 @@
             </div>
           </div>
 
-          <!-- Google Maps URL -->
-          <div>
-            <label class="field-label">Your Google Maps URL <span style="color:#c8a96e;">*</span></label>
-            <input class="field" type="url" placeholder="maps.google.com/..." required>
+          <!-- Row: Country + City -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div>
+              <label class="field-label">Country <span style="color:#c8a96e;">*</span></label>
+              <input class="field" type="text" placeholder="United States" required>
+            </div>
+            <div>
+              <label class="field-label">City <span style="color:#c8a96e;">*</span></label>
+              <input class="field" type="text" placeholder="New York" required>
+            </div>
           </div>
 
           <!-- Timeline -->
@@ -251,6 +263,21 @@
             </svg>
           </button>
         </form>
+        <script>
+          document.getElementById('apply-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var form = document.getElementById('apply-form');
+            var data = new FormData(form);
+            fetch('https://formsubmit.co/ajax/ata.marketing@hotmail.com', {
+              method: 'POST',
+              headers: { 'Accept': 'application/json' },
+              body: data
+            }).finally(function() {
+              form.style.display = 'none';
+              document.getElementById('form-success').style.display = 'block';
+            });
+          });
+        </script>
       </div>
     </div>
   </section>
