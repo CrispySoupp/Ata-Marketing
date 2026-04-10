@@ -155,6 +155,8 @@
     .custom-select-option .opt-flag { font-size: 16px; line-height: 1; }
     .custom-select-option .opt-code { color: #c8a96e; font-size: 11px; margin-left: auto; }
     .no-results { padding: 12px 14px; font-size: 12px; color: #555; text-align: center; display: none; }
+    @keyframes autofill-detect { from {} to {} }
+    .custom-select-search:-webkit-autofill { animation-name: autofill-detect; }
 
     /* Phone code button smaller */
     .phone-code-btn {
@@ -356,7 +358,7 @@
           {name:'Argentina',flag:'🇦🇷',code:'+54',cities:['Buenos Aires','Córdoba','Rosario','Mendoza']},
           {name:'Australia',flag:'🇦🇺',code:'+61',provinces:['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','ACT','Northern Territory'],cities:['Sydney','Melbourne','Brisbane','Perth','Adelaide']},
           {name:'Austria',flag:'🇦🇹',code:'+43',provinces:['Vienna','Lower Austria','Upper Austria','Styria','Tyrol','Carinthia','Salzburg','Vorarlberg','Burgenland'],cities:['Vienna','Graz','Linz','Salzburg']},
-          {name:'Belgium',flag:'🇧🇪',code:'+32',provinces:['Antwerp','East Flanders','West Flanders','Flemish Brabant','Walloon Brabant','Hainaut','Liège','Luxembourg','Namur','Brussels'],cities:['Brussels','Antwerp','Ghent','Bruges','Liège']},
+          {name:'Belgium',flag:'🇧🇪',code:'+32',aliases:['België','Belgique','Belgien','Belgio','Bélgica'],provinces:['Antwerp','East Flanders','West Flanders','Flemish Brabant','Walloon Brabant','Hainaut','Liège','Luxembourg','Namur','Brussels'],cities:['Brussels','Antwerp','Ghent','Bruges','Liège']},
           {name:'Brazil',flag:'🇧🇷',code:'+55',provinces:['São Paulo','Rio de Janeiro','Minas Gerais','Bahia','Rio Grande do Sul','Paraná','Ceará','Pernambuco'],cities:['São Paulo','Rio de Janeiro','Brasília','Salvador','Fortaleza']},
           {name:'Canada',flag:'🇨🇦',code:'+1',provinces:['Ontario','Quebec','British Columbia','Alberta','Manitoba','Saskatchewan','Nova Scotia','New Brunswick','Prince Edward Island','Newfoundland and Labrador'],cities:['Toronto','Montreal','Vancouver','Calgary','Ottawa']},
           {name:'Chile',flag:'🇨🇱',code:'+56',cities:['Santiago','Valparaíso','Concepción']},
@@ -367,8 +369,8 @@
           {name:'Denmark',flag:'🇩🇰',code:'+45',cities:['Copenhagen','Aarhus','Odense','Aalborg']},
           {name:'Egypt',flag:'🇪🇬',code:'+20',cities:['Cairo','Alexandria','Giza','Luxor']},
           {name:'Finland',flag:'🇫🇮',code:'+358',cities:['Helsinki','Espoo','Tampere','Turku']},
-          {name:'France',flag:'🇫🇷',code:'+33',cities:['Paris','Marseille','Lyon','Toulouse','Nice','Bordeaux']},
-          {name:'Germany',flag:'🇩🇪',code:'+49',provinces:['Bavaria','North Rhine-Westphalia','Baden-Württemberg','Lower Saxony','Hesse','Saxony','Berlin','Hamburg','Brandenburg','Rhineland-Palatinate'],cities:['Berlin','Hamburg','Munich','Cologne','Frankfurt','Stuttgart']},
+          {name:'France',flag:'🇫🇷',code:'+33',aliases:['Frankrijk','Frankreich','Francia','Frankrig'],cities:['Paris','Marseille','Lyon','Toulouse','Nice','Bordeaux']},
+          {name:'Germany',flag:'🇩🇪',code:'+49',aliases:['Deutschland','Allemagne','Germania','Alemania','Duitsland'],provinces:['Bavaria','North Rhine-Westphalia','Baden-Württemberg','Lower Saxony','Hesse','Saxony','Berlin','Hamburg','Brandenburg','Rhineland-Palatinate'],cities:['Berlin','Hamburg','Munich','Cologne','Frankfurt','Stuttgart']},
           {name:'Greece',flag:'🇬🇷',code:'+30',cities:['Athens','Thessaloniki','Patras','Heraklion']},
           {name:'Hungary',flag:'🇭🇺',code:'+36',cities:['Budapest','Debrecen','Miskolc','Pécs']},
           {name:'India',flag:'🇮🇳',code:'+91',cities:['Mumbai','Delhi','Bangalore','Hyderabad','Chennai','Kolkata','Pune']},
@@ -384,7 +386,7 @@
           {name:'Malaysia',flag:'🇲🇾',code:'+60',cities:['Kuala Lumpur','Penang','Johor Bahru','Ipoh']},
           {name:'Mexico',flag:'🇲🇽',code:'+52',cities:['Mexico City','Guadalajara','Monterrey','Puebla','Tijuana']},
           {name:'Morocco',flag:'🇲🇦',code:'+212',cities:['Casablanca','Rabat','Fez','Marrakech','Tangier']},
-          {name:'Netherlands',flag:'🇳🇱',code:'+31',provinces:['North Holland','South Holland','Utrecht','North Brabant','Gelderland','Overijssel','Groningen','Friesland','Zeeland','Limburg','Drenthe','Flevoland'],cities:['Amsterdam','Rotterdam','The Hague','Utrecht','Eindhoven']},
+          {name:'Netherlands',flag:'🇳🇱',code:'+31',aliases:['Nederland','Niederlande','Pays-Bas','Paesi Bassi','Países Bajos','Holanda','Holland'],provinces:['North Holland','South Holland','Utrecht','North Brabant','Gelderland','Overijssel','Groningen','Friesland','Zeeland','Limburg','Drenthe','Flevoland'],cities:['Amsterdam','Rotterdam','The Hague','Utrecht','Eindhoven']},
           {name:'New Zealand',flag:'🇳🇿',code:'+64',cities:['Auckland','Wellington','Christchurch','Hamilton']},
           {name:'Nigeria',flag:'🇳🇬',code:'+234',cities:['Lagos','Abuja','Kano','Ibadan','Port Harcourt']},
           {name:'Norway',flag:'🇳🇴',code:'+47',cities:['Oslo','Bergen','Stavanger','Trondheim']},
@@ -406,10 +408,24 @@
           {name:'Turkey',flag:'🇹🇷',code:'+90',cities:['Istanbul','Ankara','Izmir','Bursa','Antalya']},
           {name:'Ukraine',flag:'🇺🇦',code:'+380',cities:['Kyiv','Kharkiv','Odesa','Dnipro','Lviv']},
           {name:'United Arab Emirates',flag:'🇦🇪',code:'+971',cities:['Dubai','Abu Dhabi','Sharjah','Ajman']},
-          {name:'United Kingdom',flag:'🇬🇧',code:'+44',provinces:['England','Scotland','Wales','Northern Ireland'],cities:['London','Manchester','Birmingham','Leeds','Glasgow','Edinburgh','Bristol']},
-          {name:'United States',flag:'🇺🇸',code:'+1',provinces:['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],cities:['New York','Los Angeles','Chicago','Houston','Phoenix','Philadelphia','San Antonio','San Diego','Dallas','San Jose','Austin','Jacksonville','Fort Worth','Columbus','Charlotte','Seattle','Denver','Boston','Miami','Atlanta']},
+          {name:'United Kingdom',flag:'🇬🇧',code:'+44',aliases:['UK','GB','Great Britain','Verenigd Koninkrijk','Royaume-Uni','Vereinigtes Königreich','Reino Unido'],provinces:['England','Scotland','Wales','Northern Ireland'],cities:['London','Manchester','Birmingham','Leeds','Glasgow','Edinburgh','Bristol']},
+          {name:'United States',flag:'🇺🇸',code:'+1',aliases:['USA','US','Verenigde Staten','États-Unis','Vereinigte Staaten','Stati Uniti','Estados Unidos','Amerika','America'],provinces:['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],cities:['New York','Los Angeles','Chicago','Houston','Phoenix','Philadelphia','San Antonio','San Diego','Dallas','San Jose','Austin','Jacksonville','Fort Worth','Columbus','Charlotte','Seattle','Denver','Boston','Miami','Atlanta']},
           {name:'Vietnam',flag:'🇻🇳',code:'+84',cities:['Ho Chi Minh City','Hanoi','Da Nang','Hai Phong']},
         ];
+
+        // ── Normalize string for fuzzy matching (strip diacritics, lowercase) ──
+        function norm(s) {
+          return (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+        }
+
+        function countryMatches(opt, q) {
+          if (!q) return true;
+          const nq = norm(q);
+          if (norm(opt.name).includes(nq)) return true;
+          if (opt.code && opt.code.includes(q)) return true;
+          if (opt.aliases && opt.aliases.some(a => norm(a).includes(nq))) return true;
+          return false;
+        }
 
         // ── Generic dropdown factory ──
         function makeDropdown({btnId, dropdownId, searchId, listId, noResultsId, options, renderOption, onSelect}) {
@@ -420,6 +436,7 @@
           const noResults = document.getElementById(noResultsId);
 
           // Render options
+          const optEls = [];
           options.forEach((opt, i) => {
             const el = document.createElement('div');
             el.className = 'custom-select-option';
@@ -431,6 +448,7 @@
               closeDropdown(btn, dropdown, search);
             });
             list.appendChild(el);
+            optEls.push(el);
           });
 
           // Open / close
@@ -440,18 +458,41 @@
             if (!isOpen) openDropdown(btn, dropdown, search);
           });
 
-          // Search filter
-          search.addEventListener('input', () => {
-            const q = search.value.toLowerCase().trim();
-            let visible = 0;
-            list.querySelectorAll('.custom-select-option').forEach(el => {
-              const idx = parseInt(el.dataset.idx);
-              const match = options[idx].name.toLowerCase().includes(q) ||
-                            (options[idx].code && options[idx].code.includes(q));
+          // Filter list and optionally auto-select on exact/unique match
+          function filterList(q, autoSelect) {
+            const visibleEls = [];
+            optEls.forEach((el, i) => {
+              const match = countryMatches(options[i], q);
               el.classList.toggle('hidden', !match);
-              if (match) visible++;
+              if (match) visibleEls.push({el, opt: options[i]});
             });
-            noResults.style.display = visible === 0 ? 'block' : 'none';
+            noResults.style.display = visibleEls.length === 0 ? 'block' : 'none';
+
+            if (autoSelect && q) {
+              // Exact alias or name match → select immediately
+              const exact = visibleEls.find(({opt}) =>
+                norm(opt.name) === norm(q) ||
+                (opt.aliases && opt.aliases.some(a => norm(a) === norm(q)))
+              );
+              const target = exact || (visibleEls.length === 1 ? visibleEls[0] : null);
+              if (target) {
+                onSelect(target.opt, target.el, btn, dropdown);
+                closeDropdown(btn, dropdown, search);
+              }
+            }
+          }
+
+          // Typing
+          search.addEventListener('input', () => filterList(search.value, false));
+
+          // Autofill: browsers fire 'change' or trigger a CSS animation on autofilled inputs
+          search.addEventListener('change', () => filterList(search.value, true));
+
+          // Detect browser autofill via animationstart (Chrome/Edge inject :-webkit-autofill)
+          search.addEventListener('animationstart', (e) => {
+            if (e.animationName === 'autofill-detect') {
+              setTimeout(() => filterList(search.value, true), 100);
+            }
           });
 
           // Close on outside click
