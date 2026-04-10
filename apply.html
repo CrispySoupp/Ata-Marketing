@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get Your Profile Analyzed — Ata Marketing</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
   <style>
@@ -100,6 +101,67 @@
     .gold-divider { height: 0.5px; background: linear-gradient(to right,transparent,rgba(200,169,110,0.28) 30%,rgba(200,169,110,0.28) 70%,transparent); }
     .card-surface { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(200,169,110,0.12); border-radius: 14px; }
 
+    /* ── Custom searchable dropdowns ── */
+    .custom-select-wrap { position: relative; }
+    .custom-select-btn {
+      background: rgba(255,255,255,0.04);
+      border: 0.5px solid rgba(240,236,228,0.15);
+      color: #f0ece4; border-radius: 8px;
+      padding: 13px 16px; font-family: 'DM Sans', sans-serif;
+      font-size: 13px; outline: none; width: 100%;
+      transition: border-color 0.18s ease, background 0.18s ease;
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+      text-align: left; user-select: none;
+    }
+    .custom-select-btn.open,
+    .custom-select-btn:focus { border-color: rgba(200,169,110,0.45); background: rgba(255,255,255,0.06); }
+    .custom-select-btn .caret {
+      width: 14px; height: 14px; flex-shrink: 0; margin-left: 8px;
+      transition: transform 0.18s ease;
+    }
+    .custom-select-btn.open .caret { transform: rotate(180deg); }
+    .custom-select-placeholder { color: #555; }
+    .custom-select-dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 999;
+      background: #252118; border: 0.5px solid rgba(200,169,110,0.25);
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 2px 8px rgba(0,0,0,0.3);
+      display: none;
+    }
+    .custom-select-dropdown.open { display: block; }
+    .custom-select-search {
+      background: rgba(255,255,255,0.05);
+      border: none; border-bottom: 0.5px solid rgba(200,169,110,0.15);
+      color: #f0ece4; padding: 10px 14px;
+      font-family: 'DM Sans', sans-serif; font-size: 12px;
+      outline: none; width: 100%;
+    }
+    .custom-select-search::placeholder { color: #555; }
+    .custom-select-list {
+      max-height: 200px; overflow-y: auto;
+      scrollbar-width: thin; scrollbar-color: rgba(200,169,110,0.25) transparent;
+    }
+    .custom-select-list::-webkit-scrollbar { width: 4px; }
+    .custom-select-list::-webkit-scrollbar-track { background: transparent; }
+    .custom-select-list::-webkit-scrollbar-thumb { background: rgba(200,169,110,0.25); border-radius: 4px; }
+    .custom-select-option {
+      padding: 10px 14px; font-size: 12px; color: #aaa;
+      cursor: pointer; transition: background 0.12s ease, color 0.12s ease;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .custom-select-option:hover { background: rgba(200,169,110,0.08); color: #f0ece4; }
+    .custom-select-option.selected { color: #c8a96e; background: rgba(200,169,110,0.06); }
+    .custom-select-option.hidden { display: none; }
+    .custom-select-option .opt-flag { font-size: 16px; line-height: 1; }
+    .custom-select-option .opt-code { color: #c8a96e; font-size: 11px; margin-left: auto; }
+    .no-results { padding: 12px 14px; font-size: 12px; color: #555; text-align: center; display: none; }
+
+    /* Phone code button smaller */
+    .phone-code-btn {
+      min-width: 72px; justify-content: center; gap: 4px;
+    }
+    .phone-code-btn .caret { margin-left: 0; }
+
     /* ── FAQ accordion ── */
     .faq-item { border-bottom: 0.5px solid rgba(200,169,110,0.14); }
     .faq-item summary { cursor: pointer; list-style: none; padding: 18px 0; display: flex; align-items: center; justify-content: space-between; }
@@ -175,7 +237,7 @@
         <div id="form-success" style="display:none;text-align:center;padding:48px 24px;">
           <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#f0ece4;line-height:1.4;">Congratulations, you will rank top 3 in Google in 90 days.</div>
         </div>
-        <form id="apply-form" action="https://formsubmit.co/ata.marketing@hotmail.com" method="POST" style="display:flex;flex-direction:column;gap:14px;">
+        <form id="apply-form" action="https://formsubmit.co/ata.marketing@hotmail.com" method="POST" autocomplete="on" style="display:flex;flex-direction:column;gap:14px;">
           <input type="hidden" name="_subject" value="New Profile Analysis Request — Ata Marketing">
           <input type="hidden" name="_next" value="">
           <input type="hidden" name="_captcha" value="false">
@@ -183,29 +245,40 @@
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
             <div>
               <label class="field-label">First Name <span style="color:#c8a96e;">*</span></label>
-              <input class="field" type="text" placeholder="First name" required>
+              <input class="field" type="text" name="first_name" id="first_name" placeholder="First name" required autocomplete="given-name">
             </div>
             <div>
               <label class="field-label">Last Name <span style="color:#c8a96e;">*</span></label>
-              <input class="field" type="text" placeholder="Last name" required>
+              <input class="field" type="text" name="last_name" id="last_name" placeholder="Last name" required autocomplete="family-name">
             </div>
           </div>
 
           <!-- Business email -->
           <div>
             <label class="field-label">Business Email <span style="color:#c8a96e;">*</span></label>
-            <input class="field" type="email" placeholder="you@yourbusiness.com" required>
+            <input class="field" type="email" name="email" id="email" placeholder="you@yourbusiness.com" required autocomplete="email">
           </div>
 
           <!-- Row: Phone code + number -->
-          <div style="display:grid;grid-template-columns:80px 1fr;gap:10px;">
+          <div style="display:grid;grid-template-columns:100px 1fr;gap:10px;">
             <div>
               <label class="field-label">Code</label>
-              <input class="field" type="text" placeholder="+1" style="text-align:center;">
+              <div class="custom-select-wrap" id="phone-code-wrap">
+                <button type="button" class="custom-select-btn phone-code-btn" id="phone-code-btn" aria-haspopup="listbox" aria-expanded="false">
+                  <span id="phone-code-display" class="custom-select-placeholder">🌍 +--</span>
+                  <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="custom-select-dropdown" id="phone-code-dropdown" role="listbox">
+                  <input class="custom-select-search" type="text" placeholder="Search country…" id="phone-code-search" autocomplete="off">
+                  <div class="custom-select-list" id="phone-code-list"></div>
+                  <div class="no-results" id="phone-code-noresults">No results</div>
+                </div>
+                <input type="hidden" name="phone_code" id="phone-code-value" autocomplete="tel-country-code" required>
+              </div>
             </div>
             <div>
               <label class="field-label">Phone Number <span style="color:#c8a96e;">*</span></label>
-              <input class="field" type="tel" placeholder="(555) 000-0000" required>
+              <input class="field" type="tel" name="phone" id="phone" placeholder="(555) 000-0000" required autocomplete="tel-national">
             </div>
           </div>
 
@@ -213,24 +286,35 @@
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
             <div>
               <label class="field-label">Website <span style="color:#c8a96e;">*</span></label>
-              <input class="field" type="url" placeholder="yourbusiness.com" required>
+              <input class="field" type="url" name="website" id="website" placeholder="yourbusiness.com" required autocomplete="url">
             </div>
             <div>
               <label class="field-label">Company Name <span style="color:#c8a96e;">*</span></label>
-              <input class="field" type="text" placeholder="Your Business LLC" required>
+              <input class="field" type="text" name="company" id="company" placeholder="Your Business LLC" required autocomplete="organization">
             </div>
           </div>
 
-          <!-- Row: Country + City -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div>
-              <label class="field-label">Country <span style="color:#c8a96e;">*</span></label>
-              <input class="field" type="text" placeholder="United States" required>
+          <!-- Country -->
+          <div>
+            <label class="field-label">Country <span style="color:#c8a96e;">*</span></label>
+            <div class="custom-select-wrap" id="country-wrap">
+              <button type="button" class="custom-select-btn" id="country-btn" aria-haspopup="listbox" aria-expanded="false">
+                <span id="country-display" class="custom-select-placeholder">Select country</span>
+                <svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="custom-select-dropdown" id="country-dropdown" role="listbox">
+                <input class="custom-select-search" type="text" placeholder="Search or type country…" id="country-search" autocomplete="off">
+                <div class="custom-select-list" id="country-list"></div>
+                <div class="no-results" id="country-noresults">No results</div>
+              </div>
+              <input type="hidden" name="country" id="country-value" autocomplete="country-name" required>
             </div>
-            <div>
-              <label class="field-label">City <span style="color:#c8a96e;">*</span></label>
-              <input class="field" type="text" placeholder="New York" required>
-            </div>
+          </div>
+
+          <!-- City -->
+          <div>
+            <label class="field-label">City <span style="color:#c8a96e;">*</span></label>
+            <input class="field" type="text" id="city-field" name="city" placeholder="Your city" required autocomplete="address-level2">
           </div>
 
           <!-- Timeline -->
@@ -264,6 +348,180 @@
           </button>
         </form>
         <script>
+        // ── Country + phone code data ──
+        const COUNTRIES = [
+          {name:'Afghanistan',flag:'🇦🇫',code:'+93',cities:['Kabul','Kandahar','Herat']},
+          {name:'Albania',flag:'🇦🇱',code:'+355',cities:['Tirana','Durrës','Vlorë']},
+          {name:'Algeria',flag:'🇩🇿',code:'+213',cities:['Algiers','Oran','Constantine']},
+          {name:'Argentina',flag:'🇦🇷',code:'+54',cities:['Buenos Aires','Córdoba','Rosario','Mendoza']},
+          {name:'Australia',flag:'🇦🇺',code:'+61',provinces:['New South Wales','Victoria','Queensland','Western Australia','South Australia','Tasmania','ACT','Northern Territory'],cities:['Sydney','Melbourne','Brisbane','Perth','Adelaide']},
+          {name:'Austria',flag:'🇦🇹',code:'+43',provinces:['Vienna','Lower Austria','Upper Austria','Styria','Tyrol','Carinthia','Salzburg','Vorarlberg','Burgenland'],cities:['Vienna','Graz','Linz','Salzburg']},
+          {name:'Belgium',flag:'🇧🇪',code:'+32',provinces:['Antwerp','East Flanders','West Flanders','Flemish Brabant','Walloon Brabant','Hainaut','Liège','Luxembourg','Namur','Brussels'],cities:['Brussels','Antwerp','Ghent','Bruges','Liège']},
+          {name:'Brazil',flag:'🇧🇷',code:'+55',provinces:['São Paulo','Rio de Janeiro','Minas Gerais','Bahia','Rio Grande do Sul','Paraná','Ceará','Pernambuco'],cities:['São Paulo','Rio de Janeiro','Brasília','Salvador','Fortaleza']},
+          {name:'Canada',flag:'🇨🇦',code:'+1',provinces:['Ontario','Quebec','British Columbia','Alberta','Manitoba','Saskatchewan','Nova Scotia','New Brunswick','Prince Edward Island','Newfoundland and Labrador'],cities:['Toronto','Montreal','Vancouver','Calgary','Ottawa']},
+          {name:'Chile',flag:'🇨🇱',code:'+56',cities:['Santiago','Valparaíso','Concepción']},
+          {name:'China',flag:'🇨🇳',code:'+86',cities:['Beijing','Shanghai','Guangzhou','Shenzhen','Chengdu']},
+          {name:'Colombia',flag:'🇨🇴',code:'+57',cities:['Bogotá','Medellín','Cali','Barranquilla']},
+          {name:'Croatia',flag:'🇭🇷',code:'+385',cities:['Zagreb','Split','Rijeka','Osijek']},
+          {name:'Czech Republic',flag:'🇨🇿',code:'+420',cities:['Prague','Brno','Ostrava','Plzeň']},
+          {name:'Denmark',flag:'🇩🇰',code:'+45',cities:['Copenhagen','Aarhus','Odense','Aalborg']},
+          {name:'Egypt',flag:'🇪🇬',code:'+20',cities:['Cairo','Alexandria','Giza','Luxor']},
+          {name:'Finland',flag:'🇫🇮',code:'+358',cities:['Helsinki','Espoo','Tampere','Turku']},
+          {name:'France',flag:'🇫🇷',code:'+33',cities:['Paris','Marseille','Lyon','Toulouse','Nice','Bordeaux']},
+          {name:'Germany',flag:'🇩🇪',code:'+49',provinces:['Bavaria','North Rhine-Westphalia','Baden-Württemberg','Lower Saxony','Hesse','Saxony','Berlin','Hamburg','Brandenburg','Rhineland-Palatinate'],cities:['Berlin','Hamburg','Munich','Cologne','Frankfurt','Stuttgart']},
+          {name:'Greece',flag:'🇬🇷',code:'+30',cities:['Athens','Thessaloniki','Patras','Heraklion']},
+          {name:'Hungary',flag:'🇭🇺',code:'+36',cities:['Budapest','Debrecen','Miskolc','Pécs']},
+          {name:'India',flag:'🇮🇳',code:'+91',cities:['Mumbai','Delhi','Bangalore','Hyderabad','Chennai','Kolkata','Pune']},
+          {name:'Indonesia',flag:'🇮🇩',code:'+62',cities:['Jakarta','Surabaya','Bandung','Medan']},
+          {name:'Ireland',flag:'🇮🇪',code:'+353',cities:['Dublin','Cork','Limerick','Galway']},
+          {name:'Israel',flag:'🇮🇱',code:'+972',cities:['Tel Aviv','Jerusalem','Haifa','Beersheba']},
+          {name:'Italy',flag:'🇮🇹',code:'+39',cities:['Rome','Milan','Naples','Turin','Florence','Venice']},
+          {name:'Japan',flag:'🇯🇵',code:'+81',cities:['Tokyo','Osaka','Kyoto','Yokohama','Nagoya','Sapporo']},
+          {name:'Jordan',flag:'🇯🇴',code:'+962',cities:['Amman','Zarqa','Irbid']},
+          {name:'Kenya',flag:'🇰🇪',code:'+254',cities:['Nairobi','Mombasa','Kisumu']},
+          {name:'Kuwait',flag:'🇰🇼',code:'+965',cities:['Kuwait City','Hawalli','Salmiya']},
+          {name:'Luxembourg',flag:'🇱🇺',code:'+352',cities:['Luxembourg City','Esch-sur-Alzette']},
+          {name:'Malaysia',flag:'🇲🇾',code:'+60',cities:['Kuala Lumpur','Penang','Johor Bahru','Ipoh']},
+          {name:'Mexico',flag:'🇲🇽',code:'+52',cities:['Mexico City','Guadalajara','Monterrey','Puebla','Tijuana']},
+          {name:'Morocco',flag:'🇲🇦',code:'+212',cities:['Casablanca','Rabat','Fez','Marrakech','Tangier']},
+          {name:'Netherlands',flag:'🇳🇱',code:'+31',provinces:['North Holland','South Holland','Utrecht','North Brabant','Gelderland','Overijssel','Groningen','Friesland','Zeeland','Limburg','Drenthe','Flevoland'],cities:['Amsterdam','Rotterdam','The Hague','Utrecht','Eindhoven']},
+          {name:'New Zealand',flag:'🇳🇿',code:'+64',cities:['Auckland','Wellington','Christchurch','Hamilton']},
+          {name:'Nigeria',flag:'🇳🇬',code:'+234',cities:['Lagos','Abuja','Kano','Ibadan','Port Harcourt']},
+          {name:'Norway',flag:'🇳🇴',code:'+47',cities:['Oslo','Bergen','Stavanger','Trondheim']},
+          {name:'Pakistan',flag:'🇵🇰',code:'+92',cities:['Karachi','Lahore','Islamabad','Rawalpindi','Faisalabad']},
+          {name:'Philippines',flag:'🇵🇭',code:'+63',cities:['Manila','Quezon City','Cebu','Davao']},
+          {name:'Poland',flag:'🇵🇱',code:'+48',cities:['Warsaw','Kraków','Łódź','Wrocław','Gdańsk']},
+          {name:'Portugal',flag:'🇵🇹',code:'+351',cities:['Lisbon','Porto','Braga','Coimbra','Faro']},
+          {name:'Qatar',flag:'🇶🇦',code:'+974',cities:['Doha','Al Wakrah','Al Khor']},
+          {name:'Romania',flag:'🇷🇴',code:'+40',cities:['Bucharest','Cluj-Napoca','Timișoara','Iași']},
+          {name:'Russia',flag:'🇷🇺',code:'+7',cities:['Moscow','Saint Petersburg','Novosibirsk','Yekaterinburg']},
+          {name:'Saudi Arabia',flag:'🇸🇦',code:'+966',cities:['Riyadh','Jeddah','Mecca','Medina','Dammam']},
+          {name:'Singapore',flag:'🇸🇬',code:'+65',cities:['Singapore']},
+          {name:'South Africa',flag:'🇿🇦',code:'+27',cities:['Johannesburg','Cape Town','Durban','Pretoria']},
+          {name:'South Korea',flag:'🇰🇷',code:'+82',cities:['Seoul','Busan','Incheon','Daegu','Gwangju']},
+          {name:'Spain',flag:'🇪🇸',code:'+34',cities:['Madrid','Barcelona','Valencia','Seville','Bilbao','Málaga']},
+          {name:'Sweden',flag:'🇸🇪',code:'+46',cities:['Stockholm','Gothenburg','Malmö','Uppsala']},
+          {name:'Switzerland',flag:'🇨🇭',code:'+41',cities:['Zurich','Geneva','Basel','Bern','Lausanne']},
+          {name:'Thailand',flag:'🇹🇭',code:'+66',cities:['Bangkok','Chiang Mai','Phuket','Pattaya']},
+          {name:'Turkey',flag:'🇹🇷',code:'+90',cities:['Istanbul','Ankara','Izmir','Bursa','Antalya']},
+          {name:'Ukraine',flag:'🇺🇦',code:'+380',cities:['Kyiv','Kharkiv','Odesa','Dnipro','Lviv']},
+          {name:'United Arab Emirates',flag:'🇦🇪',code:'+971',cities:['Dubai','Abu Dhabi','Sharjah','Ajman']},
+          {name:'United Kingdom',flag:'🇬🇧',code:'+44',provinces:['England','Scotland','Wales','Northern Ireland'],cities:['London','Manchester','Birmingham','Leeds','Glasgow','Edinburgh','Bristol']},
+          {name:'United States',flag:'🇺🇸',code:'+1',provinces:['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'],cities:['New York','Los Angeles','Chicago','Houston','Phoenix','Philadelphia','San Antonio','San Diego','Dallas','San Jose','Austin','Jacksonville','Fort Worth','Columbus','Charlotte','Seattle','Denver','Boston','Miami','Atlanta']},
+          {name:'Vietnam',flag:'🇻🇳',code:'+84',cities:['Ho Chi Minh City','Hanoi','Da Nang','Hai Phong']},
+        ];
+
+        // ── Generic dropdown factory ──
+        function makeDropdown({btnId, dropdownId, searchId, listId, noResultsId, options, renderOption, onSelect}) {
+          const btn = document.getElementById(btnId);
+          const dropdown = document.getElementById(dropdownId);
+          const search = document.getElementById(searchId);
+          const list = document.getElementById(listId);
+          const noResults = document.getElementById(noResultsId);
+
+          // Render options
+          options.forEach((opt, i) => {
+            const el = document.createElement('div');
+            el.className = 'custom-select-option';
+            el.dataset.idx = i;
+            el.innerHTML = renderOption(opt);
+            el.addEventListener('mousedown', (e) => {
+              e.preventDefault();
+              onSelect(opt, el, btn, dropdown);
+              closeDropdown(btn, dropdown, search);
+            });
+            list.appendChild(el);
+          });
+
+          // Open / close
+          btn.addEventListener('click', () => {
+            const isOpen = dropdown.classList.contains('open');
+            closeAllDropdowns();
+            if (!isOpen) openDropdown(btn, dropdown, search);
+          });
+
+          // Search filter
+          search.addEventListener('input', () => {
+            const q = search.value.toLowerCase().trim();
+            let visible = 0;
+            list.querySelectorAll('.custom-select-option').forEach(el => {
+              const idx = parseInt(el.dataset.idx);
+              const match = options[idx].name.toLowerCase().includes(q) ||
+                            (options[idx].code && options[idx].code.includes(q));
+              el.classList.toggle('hidden', !match);
+              if (match) visible++;
+            });
+            noResults.style.display = visible === 0 ? 'block' : 'none';
+          });
+
+          // Close on outside click
+          document.addEventListener('click', (e) => {
+            if (!btn.closest('.custom-select-wrap').contains(e.target)) {
+              closeDropdown(btn, dropdown, search);
+            }
+          });
+        }
+
+        function openDropdown(btn, dropdown, search) {
+          btn.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          dropdown.classList.add('open');
+          setTimeout(() => search && search.focus(), 50);
+        }
+
+        function closeDropdown(btn, dropdown, search) {
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          dropdown.classList.remove('open');
+          if (search) { search.value = ''; search.dispatchEvent(new Event('input')); }
+        }
+
+        function closeAllDropdowns() {
+          document.querySelectorAll('.custom-select-dropdown.open').forEach(d => {
+            const wrap = d.closest('.custom-select-wrap');
+            const btn = wrap.querySelector('.custom-select-btn');
+            const search = wrap.querySelector('.custom-select-search');
+            closeDropdown(btn, d, search);
+          });
+        }
+
+        // ── Phone code dropdown ──
+        makeDropdown({
+          btnId: 'phone-code-btn',
+          dropdownId: 'phone-code-dropdown',
+          searchId: 'phone-code-search',
+          listId: 'phone-code-list',
+          noResultsId: 'phone-code-noresults',
+          options: COUNTRIES,
+          renderOption: (c) => `<span class="opt-flag">${c.flag}</span><span>${c.name}</span><span class="opt-code">${c.code}</span>`,
+          onSelect: (c, el, btn, dropdown) => {
+            document.getElementById('phone-code-display').textContent = `${c.flag} ${c.code}`;
+            document.getElementById('phone-code-display').classList.remove('custom-select-placeholder');
+            document.getElementById('phone-code-value').value = c.code;
+            dropdown.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+          }
+        });
+
+        // ── Country dropdown ──
+
+        makeDropdown({
+          btnId: 'country-btn',
+          dropdownId: 'country-dropdown',
+          searchId: 'country-search',
+          listId: 'country-list',
+          noResultsId: 'country-noresults',
+          options: COUNTRIES,
+          renderOption: (c) => `<span class="opt-flag">${c.flag}</span><span>${c.name}</span>`,
+          onSelect: (c, el, btn, dropdown) => {
+            document.getElementById('country-display').textContent = `${c.flag}  ${c.name}`;
+            document.getElementById('country-display').classList.remove('custom-select-placeholder');
+            document.getElementById('country-value').value = c.name;
+            dropdown.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+          }
+        });
+
           document.getElementById('apply-form').addEventListener('submit', function(e) {
             e.preventDefault();
             var form = document.getElementById('apply-form');
