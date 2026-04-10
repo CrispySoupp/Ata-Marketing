@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="#2a2a2a"/>
+  <!-- Bars (left=short, mid=medium, right=tall) -->
+  <rect x="6"  y="19" width="5" height="7"  rx="1.5" fill="#f0ece4"/>
+  <rect x="13" y="14" width="5" height="12" rx="1.5" fill="#f0ece4"/>
+  <rect x="20" y="8"  width="5" height="18" rx="1.5" fill="#f0ece4"/>
+  <!-- Gold trend line -->
+  <polyline points="8,18 15,13 22,7" fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Gold dot at top of trend line -->
+  <circle cx="22" cy="7" r="2" fill="#c8a96e"/>
+</svg>
