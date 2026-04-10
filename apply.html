@@ -119,6 +119,10 @@
       font-size: 11px; color: #888;
     }
     .stat-dot { width: 6px; height: 6px; border-radius: 50%; background: #c8a96e; flex-shrink: 0; }
+
+    @media (max-width: 700px) {
+      .apply-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+    }
   </style>
 </head>
 <body>
@@ -147,7 +151,7 @@
 
   <!-- ══════════ APPLY HERO + FORM ══════════ -->
   <section style="max-width:1080px;margin:0 auto;padding:72px 28px 80px;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;" class="apply-grid">
 
       <!-- Left: Copy -->
       <div style="padding-top:8px;">
@@ -158,15 +162,11 @@
         <p data-a data-d="2" style="font-size:15px;color:#888;line-height:1.75;margin-bottom:24px;font-weight:300;">
           Fill out the form and we'll record a personalized video showing the exact things that need to change so your business ranks in the top 3 within your area.
         </p>
-        <p data-a data-d="3" style="font-size:14px;color:#666;line-height:1.7;margin-bottom:36px;font-weight:300;">
-          No costs. No obligations. No annoying sales pitch.<br><strong style="color:#f0ece4;font-weight:500;">Guaranteed.</strong>
-        </p>
-
         <!-- Social proof badges -->
         <div data-a data-d="3" style="display:flex;flex-direction:column;gap:10px;">
           <div class="stat-badge"><div class="stat-dot"></div>50+ satisfied clients</div>
           <div class="stat-badge"><div class="stat-dot"></div>4+ years of experience</div>
-          <div class="stat-badge"><div class="stat-dot"></div>Results within 90 days — guaranteed</div>
+          <div class="stat-badge"><div class="stat-dot"></div><strong style="color:#f0ece4;font-weight:500;">Results within 90 days — guaranteed</strong></div>
         </div>
       </div>
 
@@ -403,7 +403,7 @@
         </div>
       </div>
       <div class="gold-divider" style="margin-bottom:20px;"></div>
-      <div style="font-size:10px;color:#3d3830;">© 2025 All rights reserved by Ata Marketing. Legal information upon request at hello(at)atamarketing.com</div>
+      <div style="font-size:10px;color:#3d3830;">© 2025 All rights reserved by Ata Marketing. Legal information upon request at ata.marketing@hotmail.com</div>
     </div>
   </footer>
 

@@ -26,18 +26,19 @@
     * { box-sizing: border-box; }
     body { background: #1a1814; color: #f0ece4; font-family: 'DM Sans', sans-serif; }
 
-    /* ── Hero: letter spring animation ── */
+    /* ── Hero letter spring animation ── */
     @keyframes hero-letter-in {
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── Hero above-fold fade-ins (no IntersectionObserver needed) ── */
+    /* ── Hero above-fold fade-ins ── */
     @keyframes fade-up-in {
       from { opacity: 0; transform: translateY(22px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     .hero-fade { animation: fade-up-in 0.65s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
-/* ── Scroll-reveal animation ── */
+
+    /* ── Scroll-reveal ── */
     [data-a] {
       opacity: 0;
       transform: translateY(28px);
@@ -53,20 +54,6 @@
     /* ── Logo bar hover pulse ── */
     .logo-wrap:hover .bar-mid { animation: bar-pulse 0.55s cubic-bezier(0.16,1,0.3,1); }
     @keyframes bar-pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-
-    /* ── Scrolling logo strip ── */
-    .logos-track {
-      display: flex;
-      animation: scroll-left 28s linear infinite;
-      width: max-content;
-    }
-    .logos-set { display: flex; gap: 52px; align-items: center; padding-right: 52px; flex-shrink: 0; }
-    @keyframes scroll-left { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-    .logos-strip {
-      overflow: hidden;
-      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    }
 
     /* ── Play button ── */
     .play-ring {
@@ -120,15 +107,120 @@
     .card-surface { background: rgba(255,255,255,0.03); border: 0.5px solid rgba(200,169,110,0.12); border-radius: 14px; }
     .shadow-gold { box-shadow: 0 4px 28px rgba(200,169,110,0.07), 0 1px 4px rgba(0,0,0,0.4); }
     .shadow-deep { box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3); }
+
+    /* ── Language toggle ── */
+    #lang-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      background: rgba(26,24,20,0.92);
+      border: 0.5px solid rgba(200,169,110,0.3);
+      border-radius: 100px;
+      padding: 6px 6px;
+      gap: 2px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.3);
+    }
+    .lang-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      font-weight: 500;
+      padding: 6px 13px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease;
+      background: transparent;
+      color: #666;
+    }
+    .lang-btn.active {
+      background: #c8a96e;
+      color: #1a1814;
+    }
+    .lang-btn:not(.active):hover { color: #c8a96e; }
+
+    /* ══════════════════════════════════
+       MOBILE RESPONSIVE
+    ══════════════════════════════════ */
+
+    /* ── Nav ── */
+    @media (max-width: 480px) {
+      .nav-inner { padding: 0 18px !important; }
+      .nav-logo-text { font-size: 15px !important; }
+      .nav-sub { display: none !important; }
+      .nav-cta { padding: 9px 16px !important; font-size: 12px !important; }
+    }
+
+    /* ── Hero ── */
+    @media (max-width: 720px) {
+      .hero-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+      }
+      .hero-video-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-video-wrap {
+        width: min(260px, 72vw) !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-section { padding: 52px 18px 72px !important; }
+      .hero-h1 { font-size: 34px !important; }
+      .hero-p { font-size: 14px !important; }
+      .benefit-card { padding: 14px 16px !important; }
+    }
+
+    /* ── Email capture ── */
+    @media (max-width: 640px) {
+      .email-section { padding: 0 18px 60px !important; }
+      .email-card { padding: 28px 22px !important; flex-direction: column !important; }
+      .email-form-col { min-width: unset !important; max-width: unset !important; width: 100% !important; }
+      .email-h3 { font-size: 22px !important; }
+    }
+
+    /* ── Team ── */
+    @media (max-width: 480px) {
+      .team-section { padding: 60px 18px !important; }
+      .team-grid { gap: 16px !important; }
+      .team-name { font-size: 13px !important; }
+      .team-h2 { font-size: 32px !important; }
+    }
+
+    /* ── CTA ── */
+    @media (max-width: 640px) {
+      .cta-section { padding: 0 18px 72px !important; }
+      .cta-card { padding: 40px 22px !important; }
+      .cta-h2 { font-size: 28px !important; }
+      .cta-p { font-size: 13px !important; }
+    }
+
+    /* ── Footer ── */
+    @media (max-width: 640px) {
+      .footer-inner { padding: 36px 18px 24px !important; }
+      .footer-row { flex-direction: column !important; gap: 24px !important; }
+    }
+
+    /* ── Divider spacing ── */
+    @media (max-width: 480px) {
+      .section-divider { padding: 32px 18px 0 !important; }
+    }
   </style>
 </head>
 <body>
 
   <!-- ══════════ NAV ══════════ -->
   <nav style="position:sticky;top:0;z-index:50;background:rgba(26,24,20,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:0.5px solid rgba(200,169,110,0.12);">
-    <div style="max-width:1080px;margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;">
+    <div class="nav-inner" style="max-width:1080px;margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;">
       <a href="index.html" class="logo-wrap" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
-        <div style="position:relative;background:#2a2a2a;border-radius:10px;padding:8px 10px;display:flex;align-items:flex-end;gap:3px;height:36px;">
+        <div style="position:relative;background:#2a2a2a;border-radius:10px;padding:8px 10px;display:flex;align-items:flex-end;gap:3px;height:36px;flex-shrink:0;">
           <div style="background:#f0ece4;width:6px;height:10px;border-radius:2px;"></div>
           <div class="bar-mid" style="background:#f0ece4;width:6px;height:16px;border-radius:2px;"></div>
           <div style="background:#f0ece4;width:6px;height:22px;border-radius:2px;"></div>
@@ -138,152 +230,360 @@
           </svg>
         </div>
         <div>
-          <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#f0ece4;letter-spacing:-0.3px;line-height:1;">Ata Marketing</div>
-          <div style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c8a96e;margin-top:2px;">Local SEO Specialists</div>
+          <div class="nav-logo-text" style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#f0ece4;letter-spacing:-0.3px;line-height:1;">Ata Marketing</div>
+          <div class="nav-sub" style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c8a96e;margin-top:2px;" data-i18n="nav.sub">Local SEO Specialists</div>
         </div>
       </a>
-      <a href="apply.html" class="btn-gold" style="text-decoration:none;">Get Started</a>
+      <a href="apply.html" class="btn-gold nav-cta" style="text-decoration:none;" data-i18n="nav.cta">Get Started</a>
     </div>
   </nav>
 
   <!-- ══════════ HERO ══════════ -->
-  <section style="position:relative;overflow:hidden;max-width:1080px;margin:0 auto;padding:80px 28px 88px;">
+  <section class="hero-section" style="position:relative;overflow:hidden;max-width:1080px;margin:0 auto;padding:80px 28px 120px;">
+    <div class="hero-grid" style="position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;">
 
-<div style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
-
-      <!-- Left -->
+      <!-- Left: Copy -->
       <div>
-        <div class="hero-fade" style="margin-bottom:20px;animation-delay:0.05s;"><span class="sec-label">Google Business Profile</span></div>
-        <h1 id="hero-h1" style="font-family:'Playfair Display',serif;font-size:44px;font-weight:900;line-height:1.07;letter-spacing:-0.03em;color:#f0ece4;margin-bottom:20px;">
+        <div class="hero-fade" style="margin-bottom:20px;animation-delay:0.05s;"><span class="sec-label" data-i18n="hero.label">Google Business Profile</span></div>
+        <h1 id="hero-h1" class="hero-h1" style="font-family:'Playfair Display',serif;font-size:44px;font-weight:900;line-height:1.07;letter-spacing:-0.03em;color:#f0ece4;margin-bottom:20px;" data-i18n-html="hero.h1">
           Your Competitors<br>Are Showing Up.<br><span style="color:#c8a96e;">You're Not.</span>
         </h1>
-        <p class="hero-fade" style="font-size:15px;color:#888;line-height:1.72;margin-bottom:20px;font-weight:300;animation-delay:0.45s;">
+        <p class="hero-fade hero-p" style="font-size:15px;color:#888;line-height:1.72;margin-bottom:36px;font-weight:300;animation-delay:0.45s;" data-i18n="hero.p">
           Watch this short video to discover why most local businesses are invisible on Google Maps — and what it actually takes to break into the top 3.
         </p>
-        <p class="hero-fade" style="font-size:14px;font-weight:500;color:#f0ece4;line-height:1.6;margin-bottom:28px;animation-delay:0.55s;">
-          Sign up below to receive <strong style="color:#c8a96e;">3 free strategies</strong> your business can act on today to start climbing local rankings.
-        </p>
-        <div id="hero-success" style="display:none;font-size:14px;color:#f0ece4;line-height:1.7;max-width:400px;padding:16px 0;">
-          Thank you. We received your request and will contact you soon.
+
+        <!-- Benefit cards -->
+        <div class="hero-fade" style="display:flex;flex-direction:column;gap:14px;animation-delay:0.55s;">
+
+          <div class="benefit-card" style="display:flex;align-items:flex-start;gap:16px;padding:18px 20px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(200,169,110,0.14);transition:border-color 0.2s ease;" onmouseover="this.style.borderColor='rgba(200,169,110,0.32)'" onmouseout="this.style.borderColor='rgba(200,169,110,0.14)'">
+            <div style="width:36px;height:36px;border-radius:9px;background:rgba(200,169,110,0.12);border:0.5px solid rgba(200,169,110,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:#f0ece4;margin-bottom:4px;letter-spacing:0.1px;" data-i18n="benefit1.title">Visibility</div>
+              <div style="font-size:12px;color:#666;line-height:1.65;font-weight:300;" data-i18n="benefit1.desc">75% of all leads go to the top 3 results. If you're not there, you're invisible to potential customers.</div>
+            </div>
+          </div>
+
+          <div class="benefit-card" style="display:flex;align-items:flex-start;gap:16px;padding:18px 20px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(200,169,110,0.14);transition:border-color 0.2s ease;" onmouseover="this.style.borderColor='rgba(200,169,110,0.32)'" onmouseout="this.style.borderColor='rgba(200,169,110,0.14)'">
+            <div style="width:36px;height:36px;border-radius:9px;background:rgba(200,169,110,0.12);border:0.5px solid rgba(200,169,110,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:#f0ece4;margin-bottom:4px;letter-spacing:0.1px;" data-i18n="benefit2.title">No Ad Spend</div>
+              <div style="font-size:12px;color:#666;line-height:1.65;font-weight:300;" data-i18n="benefit2.desc">No pay-per-click or huge ad budgets. Organic Google Maps rankings bring in free, consistent traffic.</div>
+            </div>
+          </div>
+
+          <div class="benefit-card" style="display:flex;align-items:flex-start;gap:16px;padding:18px 20px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid rgba(200,169,110,0.14);transition:border-color 0.2s ease;" onmouseover="this.style.borderColor='rgba(200,169,110,0.32)'" onmouseout="this.style.borderColor='rgba(200,169,110,0.14)'">
+            <div style="width:36px;height:36px;border-radius:9px;background:rgba(200,169,110,0.12);border:0.5px solid rgba(200,169,110,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:#f0ece4;margin-bottom:4px;letter-spacing:0.1px;" data-i18n="benefit3.title">Long-Term Results</div>
+              <div style="font-size:12px;color:#666;line-height:1.65;font-weight:300;" data-i18n="benefit3.desc">Once you're in the top 3, you typically stay there for years — without any additional monthly costs.</div>
+            </div>
+          </div>
+
         </div>
-        <form id="hero-form" class="hero-fade" style="display:flex;flex-direction:column;gap:10px;max-width:400px;animation-delay:0.65s;">
-          <input class="email-input" type="email" name="email" placeholder="name@email.com" autocomplete="email" required>
-          <button type="submit" class="btn-gold" style="width:100%;padding:13px;font-size:13px;font-weight:500;letter-spacing:0.4px;">
-            Send Me the Free Strategies
-          </button>
-          <p style="font-size:10px;color:#555;letter-spacing:0.3px;">No spam. Unsubscribe any time.</p>
-        </form>
       </div>
 
-      <!-- Right: Video -->
-      <div class="hero-fade" style="position:relative;z-index:1;animation-delay:0.2s;">
-        <div class="video-card shadow-deep" style="border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:#2a2a2a;position:relative;cursor:pointer;">
-          <img src="https://placehold.co/640x400/1a1814/2a2a2a?text=+" alt="Video" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,24,20,0.65) 0%,rgba(200,169,110,0.06) 100%);"></div>
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,24,20,0.82) 0%,transparent 55%);"></div>
-          <!-- Label -->
-          <div style="position:absolute;top:18px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.58);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:100px;padding:6px 18px;white-space:nowrap;">
-            <span style="font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#f0ece4;letter-spacing:0.5px;">Click To Watch</span>
-          </div>
-          <!-- Sound -->
-          <div style="position:absolute;top:15px;right:15px;background:rgba(0,0,0,0.5);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f0ece4" stroke-width="2" stroke-linecap="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-            </svg>
-          </div>
-          <!-- Play -->
-          <div class="play-ring" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-            <div style="width:58px;height:58px;border-radius:50%;background:#ff0000;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.5);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </div>
-          </div>
-          <!-- Progress bar -->
-          <div style="position:absolute;bottom:0;left:0;right:0;padding:8px 14px;display:flex;align-items:center;gap:10px;">
-            <span style="font-size:10px;color:#aaa;font-family:monospace;">2:47</span>
-            <div style="flex:1;height:2px;background:rgba(255,255,255,0.12);border-radius:2px;position:relative;">
-              <div style="position:absolute;left:0;top:0;height:100%;width:35%;background:#c8a96e;border-radius:2px;"></div>
+      <!-- Right: TikTok Video -->
+      <div class="hero-fade hero-video-col" style="position:relative;z-index:1;animation-delay:0.2s;flex-shrink:0;">
+        <div class="hero-video-wrap" style="width:280px;border-radius:16px;overflow:hidden;aspect-ratio:9/16;background:#0d0d0d;position:relative;box-shadow:0 16px 64px rgba(0,0,0,0.6),0 2px 8px rgba(0,0,0,0.4);">
+          <video id="hero-video" src="brand_assets/0410.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" loop playsinline muted></video>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,24,20,0.5) 0%,transparent 40%);pointer-events:none;"></div>
+          <div id="video-overlay" onclick="toggleVideo()" style="position:absolute;inset:0;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+            <div id="play-icon" style="width:56px;height:56px;border-radius:50%;background:rgba(200,169,110,0.92);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.5);transition:opacity 0.2s ease;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a1814"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </div>
           </div>
         </div>
-        <div style="position:absolute;inset:-24px;background:radial-gradient(ellipse at center,rgba(200,169,110,0.07) 0%,transparent 68%);pointer-events:none;z-index:-1;border-radius:24px;"></div>
+        <div style="position:absolute;inset:-24px;background:radial-gradient(ellipse at center,rgba(200,169,110,0.09) 0%,transparent 68%);pointer-events:none;z-index:-1;border-radius:24px;"></div>
+        <div style="margin-top:20px;text-align:center;">
+          <a href="apply.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:9px;background:rgba(200,169,110,0.1);border:0.5px solid rgba(200,169,110,0.35);color:#c8a96e;border-radius:100px;padding:10px 22px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.3px;transition:background 0.18s ease,border-color 0.18s ease,transform 0.18s cubic-bezier(0.34,1.56,0.64,1);" onmouseover="this.style.background='rgba(200,169,110,0.18)';this.style.borderColor='rgba(200,169,110,0.6)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(200,169,110,0.1)';this.style.borderColor='rgba(200,169,110,0.35)';this.style.transform='translateY(0)'">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span data-i18n="hero.cta">Claim my free strategy call</span>
+          </a>
+          <p style="margin-top:8px;font-size:10px;color:#444;letter-spacing:0.2px;" data-i18n="hero.cta.sub">↑ Click the link mentioned in the video</p>
+        </div>
       </div>
+
     </div><!-- end grid -->
+  </section>
+
+  <!-- ══════════ SECTION DIVIDER ══════════ -->
+  <div class="section-divider" style="padding:48px max(28px, calc((100vw - 1080px)/2 + 28px)) 0;">
+    <div style="height:1px;background:linear-gradient(to right,transparent,rgba(200,169,110,0.18) 20%,rgba(200,169,110,0.18) 80%,transparent);"></div>
+  </div>
+
+  <!-- ══════════ EMAIL CAPTURE ══════════ -->
+  <section class="email-section" style="max-width:1080px;margin:0 auto;padding:0 28px 80px;">
+    <div data-a class="card-surface email-card" style="padding:48px 52px;display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap;background:rgba(255,255,255,0.02);">
+      <div style="flex:1;min-width:220px;">
+        <div style="margin-bottom:12px;"><span class="sec-label" data-i18n="email.label">Quick Wins</span></div>
+        <h3 class="email-h3" style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;letter-spacing:-0.02em;color:#f0ece4;margin-bottom:8px;line-height:1.2;" data-i18n-html="email.h3">
+          Get <em style="color:#c8a96e;">3 Free Fixes</em><br>You Can Apply Today
+        </h3>
+        <p style="font-size:13px;color:#999;line-height:1.7;font-weight:300;margin-bottom:18px;" data-i18n="email.p">3 simple improvements you can apply immediately to increase your visibility and get more local customers — no strategy call needed.</p>
+        <ul style="list-style:none;padding:0;margin:0 0 14px;display:flex;flex-direction:column;gap:10px;">
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.6;">
+            <span style="color:#c8a96e;margin-top:2px;flex-shrink:0;">✓</span>
+            <span style="color:#c0bab0;" data-i18n="email.bullet1">Fix the #1 mistake holding your Google Business Profile back</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.6;">
+            <span style="color:#c8a96e;margin-top:2px;flex-shrink:0;">✓</span>
+            <span style="color:#c0bab0;" data-i18n="email.bullet2">See exactly what your top competitors are doing differently</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.6;">
+            <span style="color:#c8a96e;margin-top:2px;flex-shrink:0;">✓</span>
+            <span style="color:#c0bab0;" data-i18n="email.bullet3">One change you can make today to start showing up in local searches</span>
+          </li>
+        </ul>
+        <p style="font-size:11px;color:#666;line-height:1.6;font-style:italic;" data-i18n="email.note">Takes under a day. No technical knowledge required.</p>
+      </div>
+      <div class="email-form-col" style="flex:1;min-width:280px;max-width:380px;">
+        <div id="hero-success" style="display:none;font-size:14px;color:#f0ece4;line-height:1.7;padding:16px 0;" data-i18n="email.success">
+          Thank you. We received your request and will contact you soon.
+        </div>
+        <form id="hero-form" style="display:flex;flex-direction:column;gap:10px;">
+          <input class="email-input" type="email" name="email" data-i18n-placeholder="email.placeholder" placeholder="name@email.com" autocomplete="email" required>
+          <button type="submit" class="btn-gold" style="width:100%;padding:13px;font-size:13px;font-weight:500;letter-spacing:0.4px;" data-i18n="email.btn">
+            Email Me the Free Fixes
+          </button>
+          <p style="font-size:10px;color:#555;letter-spacing:0.3px;" data-i18n="email.spam">No spam. Unsubscribe any time.</p>
+        </form>
+      </div>
+    </div>
   </section>
 
   <!-- ══════════ DIVIDER ══════════ -->
   <div style="max-width:1080px;margin:0 auto;padding:0 28px;"><div class="gold-divider"></div></div>
 
   <!-- ══════════ TEAM ══════════ -->
-  <section style="max-width:1080px;margin:0 auto;padding:88px 28px;">
-    <div data-a style="text-align:center;margin-bottom:16px;"><span class="sec-label">Our team</span></div>
-    <h2 data-a data-d="1" style="font-family:'Playfair Display',serif;font-size:40px;font-weight:900;text-align:center;letter-spacing:-0.03em;color:#f0ece4;margin-bottom:12px;">Meet the team</h2>
-    <p data-a data-d="2" style="text-align:center;color:#666;font-size:14px;margin-bottom:56px;font-weight:300;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.72;">The people who'll personally handle your rankings. Small team. Big results.</p>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:26px;max-width:680px;margin:0 auto;">
+  <section class="team-section" style="max-width:1080px;margin:0 auto;padding:88px 28px;">
+    <div data-a style="text-align:center;margin-bottom:16px;"><span class="sec-label" data-i18n="team.label">Our team</span></div>
+    <h2 data-a data-d="1" class="team-h2" style="font-family:'Playfair Display',serif;font-size:40px;font-weight:900;text-align:center;letter-spacing:-0.03em;color:#f0ece4;margin-bottom:12px;" data-i18n="team.h2">Meet the team</h2>
+    <p data-a data-d="2" style="text-align:center;color:#666;font-size:14px;margin-bottom:56px;font-weight:300;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.72;" data-i18n="team.p">The people who'll personally handle your rankings. Small team. Big results.</p>
+    <div class="team-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:26px;max-width:680px;margin:0 auto;">
       <div data-a data-d="1" class="team-card" style="cursor:default;">
         <div style="border-radius:13px;overflow:hidden;aspect-ratio:3/4;margin-bottom:16px;position:relative;">
           <img class="team-photo" src="brand_assets/atilla.png" alt="Atilla Kilicarslan" style="width:100%;height:100%;object-fit:cover;display:block;">
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,24,20,0.72) 0%,transparent 52%);"></div>
         </div>
-        <div style="font-size:15px;font-weight:500;color:#f0ece4;">Atilla Kilicarslan</div>
-        <div style="font-size:12px;color:#666;margin-top:3px;">Founder</div>
+        <div class="team-name" style="font-size:15px;font-weight:500;color:#f0ece4;">Atilla Kilicarslan</div>
+        <div style="font-size:12px;color:#666;margin-top:3px;" data-i18n="team.member1.role">Founder</div>
       </div>
       <div data-a data-d="2" class="team-card" style="cursor:default;">
         <div style="border-radius:13px;overflow:hidden;aspect-ratio:3/4;margin-bottom:16px;position:relative;">
           <img class="team-photo" src="brand_assets/antoine.png" alt="Antoine Somogyi" style="width:100%;height:100%;object-fit:cover;display:block;">
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(26,24,20,0.72) 0%,transparent 52%);"></div>
         </div>
-        <div style="font-size:15px;font-weight:500;color:#f0ece4;">Antoine Somogyi</div>
-        <div style="font-size:12px;color:#666;margin-top:3px;">Head of Analytics</div>
+        <div class="team-name" style="font-size:15px;font-weight:500;color:#f0ece4;">Antoine Somogyi</div>
+        <div style="font-size:12px;color:#666;margin-top:3px;" data-i18n="team.member2.role">Head of Analytics</div>
       </div>
     </div>
   </section>
 
   <!-- ══════════ FREE STUFF CTA ══════════ -->
-  <section id="cta-section" style="max-width:1080px;margin:0 auto;padding:0 28px 104px;">
-    <div data-a class="card-surface shadow-gold" style="padding:60px 48px;text-align:center;position:relative;overflow:hidden;">
+  <section id="cta-section" class="cta-section" style="max-width:1080px;margin:0 auto;padding:0 28px 104px;">
+    <div data-a class="card-surface shadow-gold cta-card" style="padding:60px 48px;text-align:center;position:relative;overflow:hidden;">
       <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:560px;height:320px;background:radial-gradient(ellipse,rgba(200,169,110,0.07) 0%,transparent 68%);pointer-events:none;"></div>
       <div style="width:52px;height:52px;border-radius:12px;background:#c8a96e;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a1814" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
         </svg>
       </div>
-      <div style="margin-bottom:16px;"><span class="sec-label">Free stuff</span></div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:38px;font-weight:900;letter-spacing:-0.03em;color:#f0ece4;margin-bottom:20px;line-height:1.1;">
+      <div style="margin-bottom:16px;"><span class="sec-label" data-i18n="cta.label">Free stuff</span></div>
+      <h2 class="cta-h2" style="font-family:'Playfair Display',serif;font-size:38px;font-weight:900;letter-spacing:-0.03em;color:#f0ece4;margin-bottom:20px;line-height:1.1;" data-i18n-html="cta.h2">
         3 Steps to Rank in the<br><em style="color:#c8a96e;">Top 3</em> on Google Maps
       </h2>
-      <p style="font-size:14px;color:#888;line-height:1.76;max-width:440px;margin:0 auto 32px;font-weight:300;">Get a free video showing the exact steps we take when a new client signs up — to get them ranking in local search within 90 days.</p>
-      <a href="apply.html" class="btn-gold" style="font-size:14px;padding:14px 36px;">Get 3 Free Steps</a>
+      <p class="cta-p" style="font-size:14px;color:#888;line-height:1.76;max-width:440px;margin:0 auto 32px;font-weight:300;" data-i18n="cta.p">Get a free video showing the exact steps we take when a new client signs up — to get them ranking in local search within 90 days.</p>
+      <a href="apply.html" class="btn-gold" style="font-size:14px;padding:14px 36px;" data-i18n="cta.btn">Get 3 Free Steps</a>
     </div>
   </section>
 
   <!-- ══════════ FOOTER ══════════ -->
-  <footer style="border-top:0.5px solid rgba(200,169,110,0.12);padding:48px 28px 32px;">
-    <div style="max-width:1080px;margin:0 auto;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px;flex-wrap:wrap;gap:32px;">
+  <footer style="border-top:0.5px solid rgba(200,169,110,0.12);">
+    <div class="footer-inner" style="max-width:1080px;margin:0 auto;padding:48px 28px 32px;">
+      <div class="footer-row" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px;flex-wrap:wrap;gap:32px;">
         <div style="max-width:280px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <div style="position:relative;background:#2a2a2a;border-radius:8px;padding:7px 9px;display:flex;align-items:flex-end;gap:2.5px;height:30px;">
+            <div style="position:relative;background:#2a2a2a;border-radius:8px;padding:7px 9px;display:flex;align-items:flex-end;gap:2.5px;height:30px;flex-shrink:0;">
               <div style="background:#f0ece4;width:5px;height:8px;border-radius:1.5px;"></div>
               <div style="background:#f0ece4;width:5px;height:13px;border-radius:1.5px;"></div>
               <div style="background:#f0ece4;width:5px;height:19px;border-radius:1.5px;"></div>
             </div>
             <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#f0ece4;letter-spacing:-0.3px;">Ata Marketing</div>
           </div>
-          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#c8a96e;margin-bottom:8px;line-height:1.3;">Dominate Your<br>Local Market.</div>
-          <div style="font-size:11px;color:#555;">Built for local business owners who are done being invisible.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#c8a96e;margin-bottom:8px;line-height:1.3;" data-i18n-html="footer.tagline">Dominate Your<br>Local Market.</div>
+          <div style="font-size:11px;color:#555;" data-i18n="footer.sub">Built for local business owners who are done being invisible.</div>
         </div>
         <div>
-          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:14px;">Legal</div>
-          <a href="terms.html" style="display:block;font-size:13px;color:#888;text-decoration:none;margin-bottom:8px;transition:color 0.15s;" onmouseover="this.style.color='#c8a96e'" onmouseout="this.style.color='#888'">Terms of Service</a>
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:14px;" data-i18n="footer.legal.label">Legal</div>
+          <a href="terms.html" style="display:block;font-size:13px;color:#888;text-decoration:none;margin-bottom:8px;transition:color 0.15s;" onmouseover="this.style.color='#c8a96e'" onmouseout="this.style.color='#888'" data-i18n="footer.terms">Terms of Service</a>
         </div>
       </div>
       <div class="gold-divider" style="margin-bottom:20px;"></div>
-      <div style="font-size:10px;color:#3d3830;">© 2025 All rights reserved by Ata Marketing. Legal information upon request at hello(at)atamarketing.com</div>
+      <div style="font-size:10px;color:#3d3830;" data-i18n="footer.copyright">© 2025 All rights reserved by Ata Marketing. Legal information upon request at ata.marketing@hotmail.com</div>
     </div>
   </footer>
 
+  <!-- ══════════ LANGUAGE TOGGLE ══════════ -->
+  <div id="lang-toggle" role="group" aria-label="Language selector">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btn-nl" onclick="setLang('nl')">NL</button>
+  </div>
+
   <script>
+    // ═══════════════════════════════════════════
+    // TRANSLATIONS
+    // Edit both "en" and "nl" objects to update copy.
+    // ═══════════════════════════════════════════
+    var translations = {
+      en: {
+        "nav.sub":           "Local SEO Specialists",
+        "nav.cta":           "Get Started",
+
+        "hero.label":        "Google Business Profile",
+        "hero.h1":           "Your Competitors<br>Are Showing Up.<br><span style=\"color:#c8a96e;\">You're Not.</span>",
+        "hero.p":            "Watch this short video to discover why most local businesses are invisible on Google Maps — and what it actually takes to break into the top 3.",
+        "hero.cta":          "Claim my free strategy call",
+        "hero.cta.sub":      "↑ Click the link mentioned in the video",
+
+        "benefit1.title":    "Visibility",
+        "benefit1.desc":     "75% of all leads go to the top 3 results. If you're not there, you're invisible to potential customers.",
+        "benefit2.title":    "No Ad Spend",
+        "benefit2.desc":     "No pay-per-click or huge ad budgets. Organic Google Maps rankings bring in free, consistent traffic.",
+        "benefit3.title":    "Long-Term Results",
+        "benefit3.desc":     "Once you're in the top 3, you typically stay there for years — without any additional monthly costs.",
+
+        "email.label":       "Quick Wins",
+        "email.h3":          "Get <em style=\"color:#c8a96e;\">3 Free Fixes</em><br>You Can Apply Today",
+        "email.p":           "3 simple improvements you can apply immediately to increase your visibility and get more local customers — no strategy call needed.",
+        "email.bullet1":     "Fix the #1 mistake holding your Google Business Profile back",
+        "email.bullet2":     "See exactly what your top competitors are doing differently",
+        "email.bullet3":     "One change you can make today to start showing up in local searches",
+        "email.note":        "Takes under a day. No technical knowledge required.",
+        "email.placeholder": "name@email.com",
+        "email.btn":         "Email Me the Free Fixes",
+        "email.spam":        "No spam. Unsubscribe any time.",
+        "email.success":     "Thank you. We received your request and will contact you soon.",
+
+        "team.label":        "Our team",
+        "team.h2":           "Meet the team",
+        "team.p":            "The people who'll personally handle your rankings. Small team. Big results.",
+        "team.member1.role": "Founder",
+        "team.member2.role": "Head of Analytics",
+
+        "cta.label":         "Free stuff",
+        "cta.h2":            "3 Steps to Rank in the<br><em style=\"color:#c8a96e;\">Top 3</em> on Google Maps",
+        "cta.p":             "Get a free video showing the exact steps we take when a new client signs up — to get them ranking in local search within 90 days.",
+        "cta.btn":           "Get 3 Free Steps",
+
+        "footer.tagline":    "Dominate Your<br>Local Market.",
+        "footer.sub":        "Built for local business owners who are done being invisible.",
+        "footer.legal.label":"Legal",
+        "footer.terms":      "Terms of Service",
+        "footer.copyright":  "© 2025 All rights reserved by Ata Marketing. Legal information upon request at ata.marketing@hotmail.com"
+      },
+      nl: {
+        "nav.sub":           "Lokale SEO Specialisten",
+        "nav.cta":           "Aan de slag",
+
+        "hero.label":        "Google Bedrijfsprofiel",
+        "hero.h1":           "Jouw Concurrenten<br>Worden Gevonden.<br><span style=\"color:#c8a96e;\">Jij Niet.</span>",
+        "hero.p":            "Bekijk deze korte video en ontdek waarom de meeste lokale bedrijven onzichtbaar zijn op Google Maps — en wat er echt nodig is om in de top 3 te komen.",
+        "hero.cta":          "Claim mijn gratis strategiegesprek",
+        "hero.cta.sub":      "↑ Klik op de link die in de video wordt genoemd",
+
+        "benefit1.title":    "Zichtbaarheid",
+        "benefit1.desc":     "75% van alle leads gaat naar de top 3 resultaten. Als je er niet bij staat, ben je onzichtbaar voor potentiële klanten.",
+        "benefit2.title":    "Geen Advertentiebudget",
+        "benefit2.desc":     "Geen pay-per-click of grote budgetten. Organische Google Maps-posities leveren gratis, consistente bezoekers op.",
+        "benefit3.title":    "Langdurige Resultaten",
+        "benefit3.desc":     "Als je eenmaal in de top 3 staat, blijf je daar doorgaans jarenlang staan — zonder extra maandelijkse kosten.",
+
+        "email.label":       "Snelle Winsten",
+        "email.h3":          "Ontvang <em style=\"color:#c8a96e;\">3 Gratis Fixes</em><br>Die Je Vandaag Kunt Toepassen",
+        "email.p":           "3 eenvoudige verbeteringen die je direct kunt toepassen om zichtbaarder te worden en meer lokale klanten te trekken — geen strategiegesprek nodig.",
+        "email.bullet1":     "Herstel de #1 fout die jouw Google Bedrijfsprofiel tegenhoudt",
+        "email.bullet2":     "Zie precies wat jouw topconcurrenten anders doen",
+        "email.bullet3":     "Één aanpassing die je vandaag kunt maken om lokaal gevonden te worden",
+        "email.note":        "Binnen een dag toepasbaar. Geen technische kennis vereist.",
+        "email.placeholder": "naam@email.com",
+        "email.btn":         "Stuur Mij de Gratis Fixes",
+        "email.spam":        "Geen spam. Altijd uitschrijven mogelijk.",
+        "email.success":     "Bedankt. We hebben je aanvraag ontvangen en nemen binnenkort contact met je op.",
+
+        "team.label":        "Ons team",
+        "team.h2":           "Maak kennis met het team",
+        "team.p":            "De mensen die jouw rankings persoonlijk beheren. Klein team. Grote resultaten.",
+        "team.member1.role": "Oprichter",
+        "team.member2.role": "Hoofd Analyse",
+
+        "cta.label":         "Gratis",
+        "cta.h2":            "3 Stappen om in de<br><em style=\"color:#c8a96e;\">Top 3</em> te komen op Google Maps",
+        "cta.p":             "Ontvang een gratis video met de exacte stappen die wij zetten als een nieuwe klant zich aanmeldt — om hen binnen 90 dagen lokaal te laten ranken.",
+        "cta.btn":           "Ontvang 3 Gratis Stappen",
+
+        "footer.tagline":    "Domineer Jouw<br>Lokale Markt.",
+        "footer.sub":        "Gemaakt voor lokale ondernemers die klaar zijn met onzichtbaar zijn.",
+        "footer.legal.label":"Juridisch",
+        "footer.terms":      "Algemene Voorwaarden",
+        "footer.copyright":  "© 2025 Alle rechten voorbehouden aan Ata Marketing. Juridische informatie op aanvraag via ata.marketing@hotmail.com"
+      }
+    };
+
+    var currentLang = 'en';
+
+    function setLang(lang) {
+      if (lang === currentLang) return;
+      currentLang = lang;
+
+      // Update html lang attribute
+      document.documentElement.lang = lang;
+
+      var t = translations[lang];
+
+      // Plain text nodes
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+
+      // HTML nodes (allow inline tags like <em>, <br>)
+      document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n-html');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+
+      // Placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n-placeholder');
+        if (t[key] !== undefined) el.placeholder = t[key];
+      });
+
+      // Toggle button active state
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-nl').classList.toggle('active', lang === 'nl');
+    }
+
+    // ═══ VIDEO TOGGLE ═══
+    function toggleVideo() {
+      var v = document.getElementById('hero-video');
+      var icon = document.getElementById('play-icon');
+      if (v.paused) {
+        v.play();
+        icon.style.opacity = '0';
+        setTimeout(function(){ icon.style.display = 'none'; }, 200);
+      } else {
+        v.pause();
+        icon.style.display = 'flex';
+        setTimeout(function(){ icon.style.opacity = '1'; }, 10);
+      }
+    }
+
     // ═══ HERO FORM ═══
     document.getElementById('hero-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -294,20 +594,22 @@
         body: data
       }).finally(function() {
         document.getElementById('hero-form').style.display = 'none';
-        document.getElementById('hero-success').style.display = 'block';
+        var successEl = document.getElementById('hero-success');
+        successEl.textContent = translations[currentLang]['email.success'];
+        successEl.style.display = 'block';
       });
     });
 
     // ═══ SCROLL REVEAL ═══
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('vis');
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
-    document.querySelectorAll('[data-a]').forEach(el => observer.observe(el));
+    document.querySelectorAll('[data-a]').forEach(function(el) { observer.observe(el); });
   </script>
 </body>
 </html>
